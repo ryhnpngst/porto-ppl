@@ -1,8 +1,11 @@
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({
-  base: '/porto-ppl',
-  site: 'https://ryhnpngst.github.io',
-});
+// Otomatis menyesuaikan base path:
+// - Di GitHub Pages: menggunakan '/porto-ppl'
+// - Di Vercel / Local: menggunakan '/' (root) agar aset CSS/JS tidak 404
+const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
 
+export default defineConfig({
+  base: isGitHubPages ? '/porto-ppl' : '/',
+  site: isGitHubPages ? 'https://ryhnpngst.github.io' : undefined,
+});
