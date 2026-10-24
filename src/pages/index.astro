@@ -1,0 +1,234 @@
+---
+import '../styles/global.css';
+import { studentProfile, utsPortfolio, uasPortfolio } from '../data/portfolioData';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const utsUrl = `${base}/uts/`;
+const uasUrl = `${base}/uas/`;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Portfolio PPL Mandiri • Rayhan Pangestu Wibowo</title>
+    <meta name="description" content="Portal Akses E-Portfolio Praktik Pengalaman Lapangan (PPL) Mandiri UTS & UAS PPG Calon Guru Informatika." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="hub-body">
+    <main class="hub-container">
+      <div class="hub-header">
+        <span class="badge badge--primary">PPG Calon Guru • Pendidikan Informatika</span>
+        <h1 class="hub-title">E-Portfolio PPL Mandiri</h1>
+        <p class="hub-lead">
+          Selamat datang di portal dokumentasi akademik Praktik Pengalaman Lapangan (PPL) Mandiri oleh <strong>{studentProfile.name}</strong>. Silakan pilih portofolio akademik yang ingin Anda tinjau:
+        </p>
+      </div>
+
+      <div class="portfolio-selection-grid">
+        <!-- UTS Card -->
+        <a href={utsUrl} class="selection-card selection-card--uts">
+          <div class="selection-badge-row">
+            <span class="selection-badge">UTS</span>
+            <span class="selection-cycle">Siklus 1</span>
+          </div>
+          <h2 class="selection-title">{utsPortfolio.title}</h2>
+          <p class="selection-desc">
+            {utsPortfolio.subtitle}
+          </p>
+          <div class="selection-meta">
+            <span>Fokus: <strong>{utsPortfolio.topic}</strong></span>
+            <span>Target: {utsPortfolio.classLevel}</span>
+          </div>
+          <div class="selection-cta">
+            <span>Buka Beranda UTS</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+
+        <!-- UAS Card -->
+        <a href={uasUrl} class="selection-card selection-card--uas">
+          <div class="selection-badge-row">
+            <span class="selection-badge selection-badge--uas">UAS</span>
+            <span class="selection-cycle">Siklus Terpilih (Siklus 2)</span>
+          </div>
+          <h2 class="selection-title">{uasPortfolio.title}</h2>
+          <p class="selection-desc">
+            {uasPortfolio.subtitle}
+          </p>
+          <div class="selection-meta">
+            <span>Fokus: <strong>{uasPortfolio.topic}</strong></span>
+            <span>Target: {uasPortfolio.classLevel}</span>
+          </div>
+          <div class="selection-cta">
+            <span>Buka Beranda UAS</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <div class="hub-footer">
+        <p>
+          {studentProfile.name} • {studentProfile.studyProgram} • {studentProfile.university}
+        </p>
+      </div>
+    </main>
+
+    <style>
+      .hub-body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-8) var(--space-4);
+        background: radial-gradient(circle at top, #edf3fa 0%, var(--color-background) 100%);
+      }
+
+      .hub-container {
+        max-width: 960px;
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .hub-header {
+        text-align: center;
+        margin-bottom: var(--space-10);
+      }
+
+      .hub-title {
+        font-size: var(--text-4xl);
+        margin-top: var(--space-3);
+        margin-bottom: var(--space-3);
+        color: var(--color-text);
+      }
+
+      .hub-lead {
+        font-size: var(--text-base);
+        color: var(--color-text-muted);
+        max-width: 640px;
+        margin-inline: auto;
+        line-height: 1.7;
+      }
+
+      .portfolio-selection-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        margin-bottom: var(--space-10);
+      }
+
+      @media (min-width: 768px) {
+        .portfolio-selection-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .selection-card {
+        background-color: var(--color-surface);
+        border: 2px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-8);
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow-card);
+        transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+      }
+
+      .selection-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--color-primary);
+      }
+
+      .selection-badge-row {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+      }
+
+      .selection-badge {
+        font-size: var(--text-xs);
+        font-weight: var(--font-bold);
+        color: #ffffff;
+        background-color: var(--color-primary);
+        padding: 0.25rem 0.6rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .selection-badge--uas {
+        background-color: #274b75;
+      }
+
+      .selection-cycle {
+        font-size: var(--text-xs);
+        color: var(--color-text-muted);
+        font-weight: var(--font-medium);
+      }
+
+      .selection-title {
+        font-size: var(--text-xl);
+        color: var(--color-text);
+        margin-bottom: var(--space-3);
+        line-height: 1.35;
+      }
+
+      .selection-desc {
+        font-size: var(--text-sm);
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        margin-bottom: var(--space-6);
+        flex: 1;
+      }
+
+      .selection-meta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        font-size: var(--text-xs);
+        color: var(--color-text);
+        background-color: #f7f9fc;
+        padding: var(--space-3);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--color-border);
+        margin-bottom: var(--space-6);
+      }
+
+      .selection-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--color-primary);
+        font-weight: var(--font-semibold);
+        font-size: var(--text-sm);
+        padding-top: var(--space-4);
+        border-top: 1px solid #edf2f7;
+      }
+
+      .selection-card:hover .selection-cta {
+        color: var(--color-primary-hover);
+      }
+
+      .hub-footer {
+        text-align: center;
+        font-size: var(--text-xs);
+        color: var(--color-text-muted);
+      }
+    </style>
+  </body>
+</html>
+

@@ -1,0 +1,99 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import { utsPortfolio } from '../../data/portfolioData';
+---
+
+<PortfolioLayout
+  title={`Analisis Artefak • ${utsPortfolio.title}`}
+  description="Halaman analisis mendalam artefak pembelajaran berbasis teori pedagogis untuk Siklus 1."
+  portfolioType="UTS"
+  activePage="analisis-artefak"
+>
+  <div class="container section-spacing">
+    <div class="page-header">
+      <span class="badge">Tahap Selanjutnya</span>
+      <h1 class="page-title">Analisis Artefak — Siklus 1</h1>
+      <p class="page-desc">
+        Halaman ini disiapkan untuk memuat analisis mendalam dari setiap artefak pembelajaran (Modul Ajar, Media Interaktif, LKPD, Instrumen Asesmen, dan Hasil Kerja Murid) berdasarkan kajian teori pedagogis sesuai tahapan pengembangan berikutnya.
+      </p>
+    </div>
+
+    <div class="card placeholder-card">
+      <div class="placeholder-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+      </div>
+      <h2 class="placeholder-heading">Struktur Analisis Artefak (PRD Tahap 5)</h2>
+      <p class="placeholder-text">
+        Setiap artefak akan dianalisis berdasarkan 8 poin standar: identitas artefak, konteks, tujuan, kajian teori, kelebihan, kekurangan, analisis kritis, serta rekomendasi perbaikan konkret.
+      </p>
+      <div class="placeholder-actions">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/uts/`} class="btn btn--primary">
+          ← Kembali ke Beranda UTS
+        </a>
+      </div>
+    </div>
+  </div>
+</PortfolioLayout>
+
+<style>
+  .page-header {
+    max-width: var(--reading-width);
+    margin-bottom: var(--space-8);
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .page-desc {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .placeholder-card {
+    text-align: center;
+    padding: var(--space-12) var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .placeholder-icon {
+    width: 72px;
+    height: 72px;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .placeholder-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .placeholder-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+  }
+
+  .placeholder-actions {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+

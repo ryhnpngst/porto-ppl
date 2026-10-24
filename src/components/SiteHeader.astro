@@ -1,0 +1,346 @@
+---
+interface Props {
+  portfolioType: 'UTS' | 'UAS';
+  activePage: 'beranda' | 'analisis-artefak' | 'refleksi';
+}
+
+const { portfolioType, activePage } = Astro.props;
+
+// Ensure base URL is clean and handles subpaths
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isUTS = portfolioType === 'UTS';
+
+const basePath = isUTS ? `${base}/uts` : `${base}/uas`;
+const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
+const otherLabel = isUTS ? 'Beralih ke Portofolio UAS' : 'Beralih ke Portofolio UTS';
+---
+
+<header class="site-header">
+  <div class="container header-container">
+    <div class="brand-group">
+      <a href={`${basePath}/`} class="brand-link" aria-label={`E-Portfolio PPL Mandiri ${portfolioType}`}>
+        <span class="brand-logo-badge">{portfolioType}</span>
+        <div class="brand-titles">
+          <span class="brand-name">E-Portfolio PPL</span>
+          <span class="brand-sub">Praktik Mengajar Mandiri</span>
+        </div>
+      </a>
+      <span class="cycle-pill" aria-label={`Fokus ${isUTS ? 'Siklus 1' : 'Siklus Terpilih'}`}>
+        {isUTS ? 'Siklus 1' : 'Siklus Terpilih'}
+      </span>
+    </div>
+
+    <!-- Mobile menu toggle button -->
+    <button
+      type="button"
+      id="menu-toggle-btn"
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="primary-nav"
+      aria-label="Buka menu navigasi"
+    >
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <!-- Navigation links -->
+    <nav id="primary-nav" class="nav-menu" aria-label="Navigasi Utama">
+      <ul class="nav-list">
+        <li>
+          <a
+            href={`${basePath}/`}
+            class:list={['nav-link', { 'nav-link--active': activePage === 'beranda' }]}
+            aria-current={activePage === 'beranda' ? 'page' : undefined}
+          >
+            Beranda
+          </a>
+        </li>
+        <li>
+          <a
+            href={`${basePath}/analisis-artefak/`}
+            class:list={['nav-link', { 'nav-link--active': activePage === 'analisis-artefak' }]}
+            aria-current={activePage === 'analisis-artefak' ? 'page' : undefined}
+          >
+            Analisis Artefak
+          </a>
+        </li>
+        <li>
+          <a
+            href={`${basePath}/refleksi/`}
+            class:list={['nav-link', { 'nav-link--active': activePage === 'refleksi' }]}
+            aria-current={activePage === 'refleksi' ? 'page' : undefined}
+          >
+            Refleksi
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href={`${otherPath}/`} class="btn-switch" title={otherLabel}>
+          <span class="switch-dot"></span>
+          <span>{isUTS ? 'Portofolio UAS' : 'Portofolio UTS'}</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(34, 40, 49, 0.04);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-4);
+  }
+
+  .brand-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .brand-logo-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-md);
+  }
+
+  .brand-titles {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  .brand-sub {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    line-height: 1.2;
+  }
+
+  .cycle-pill {
+    display: none;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: var(--font-semibold);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-active);
+    border-radius: var(--radius-pill);
+    border: 1px solid #c9d4e4;
+  }
+
+  @media (min-width: 640px) {
+    .cycle-pill {
+      display: inline-flex;
+    }
+  }
+
+  /* Navigation styling */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+    background-color: rgba(219, 226, 239, 0.4);
+  }
+
+  .nav-link--active {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    font-weight: var(--font-semibold);
+  }
+
+  .btn-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.4rem 0.85rem;
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-primary-active);
+    background-color: #f1f4f9;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-switch:hover {
+    background-color: var(--color-primary-light);
+    border-color: #b0c2db;
+  }
+
+  .switch-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+
+  /* Hamburger button for mobile */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-bar {
+    width: 20px;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+  }
+
+  /* Mobile responsive styling */
+  @media (max-width: 899px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 8px 24px rgba(34, 40, 49, 0.1);
+      flex-direction: column;
+      align-items: stretch;
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      gap: var(--space-4);
+      display: none;
+    }
+
+    .nav-menu.is-open {
+      display: flex;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-1);
+    }
+
+    .nav-link {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: var(--text-base);
+    }
+
+    .nav-actions {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-4);
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-switch {
+      width: 100%;
+      justify-content: center;
+      padding: 0.6rem 1rem;
+      font-size: var(--text-sm);
+    }
+  }
+</style>
+
+<script>
+  // Accessible mobile toggle script
+  const toggleBtn = document.getElementById('menu-toggle-btn');
+  const navMenu = document.getElementById('primary-nav');
+
+  if (toggleBtn && navMenu) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      navMenu.classList.toggle('is-open');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (!toggleBtn.contains(target) && !navMenu.contains(target) && navMenu.classList.contains('is-open')) {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('is-open');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && navMenu.classList.contains('is-open')) {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('is-open');
+        toggleBtn.focus();
+      }
+    });
+  }
+</script>
+

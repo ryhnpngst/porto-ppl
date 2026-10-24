@@ -1,0 +1,152 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import PortfolioHero from '../../components/PortfolioHero.astro';
+import ProfileSection from '../../components/ProfileSection.astro';
+import IntroSection from '../../components/IntroSection.astro';
+import ArtifactPreview from '../../components/ArtifactPreview.astro';
+import ArtifactCard from '../../components/ArtifactCard.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import { uasPortfolio } from '../../data/portfolioData';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const analysisPageHref = `${base}/uas/analisis-artefak/`;
+---
+
+<PortfolioLayout
+  title={`${uasPortfolio.title} • PPG Calon Guru Informatika`}
+  description={uasPortfolio.heroDescription}
+  portfolioType="UAS"
+  activePage="beranda"
+>
+  <!-- Hero Section -->
+  <PortfolioHero
+    type="UAS"
+    eyebrow={uasPortfolio.badgeLabel}
+    title={uasPortfolio.title}
+    description={uasPortfolio.heroDescription}
+    cycle={uasPortfolio.cycle}
+    topic={uasPortfolio.topic}
+    classLevel={uasPortfolio.classLevel}
+    school={uasPortfolio.school}
+    primaryActionLabel="Lihat Modul Proyek Terpilih"
+    primaryActionHref="#rancangan-pembelajaran"
+    secondaryActionLabel="Tonton Video Pembelajaran"
+    secondaryActionHref="#video-praktik"
+  />
+
+  <!-- Academic Profile Section -->
+  <ProfileSection cycle={uasPortfolio.cycle} />
+
+  <!-- Portfolio Introduction & 3 Pillars -->
+  <IntroSection cycle={uasPortfolio.cycle} introText={uasPortfolio.introText} />
+
+  <!-- Primary Teaching Evidence (Modul Ajar & Video Embed) -->
+  <ArtifactPreview
+    lessonPlan={uasPortfolio.lessonPlan}
+    teachingVideo={uasPortfolio.teachingVideo}
+    analysisPageHref={analysisPageHref}
+  />
+
+  <!-- Supporting Artifacts Overview Grid -->
+  <section class="section-spacing supporting-section" id="artefak-pendukung" aria-labelledby="supporting-title">
+    <div class="container">
+      <div class="supporting-header">
+        <div>
+          <span class="badge">Artefak Pendukung Siklus Terpilih</span>
+          <h2 id="supporting-title" class="supporting-title">Instrumen & Bukti Pembelajaran Siklus 2</h2>
+          <p class="supporting-desc">
+            Dokumen pendukung siklus terbaik terpilih mencakup panduan proyek komputasi, lembar observasi autentik, rubrik penilaian kinerja, dan portofolio visualisasi data peserta didik.
+          </p>
+        </div>
+        <a href={analysisPageHref} class="btn btn--secondary all-analysis-btn">
+          <span>Lihat Seluruh Analisis Artefak</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <div class="artifacts-grid">
+        {uasPortfolio.supportingArtifacts.map((artifact) => (
+          <ArtifactCard
+            title={artifact.title}
+            category={artifact.category}
+            description={artifact.description}
+            context={artifact.context}
+            driveUrl={artifact.driveUrl}
+            analysisHref={`${analysisPageHref}#${artifact.id}`}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Contact Section -->
+  <ContactSection cycle={uasPortfolio.cycle} />
+</PortfolioLayout>
+
+<style>
+  .supporting-section {
+    background-color: var(--color-background);
+  }
+
+  .supporting-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .supporting-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+  }
+
+  .supporting-title {
+    font-size: var(--text-3xl);
+    color: var(--color-text);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .supporting-desc {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    max-width: var(--reading-width);
+    margin: 0;
+  }
+
+  .all-analysis-btn {
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .all-analysis-btn {
+      align-self: flex-end;
+    }
+  }
+
+  .artifacts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .artifacts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .artifacts-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+

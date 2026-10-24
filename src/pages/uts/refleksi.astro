@@ -1,0 +1,99 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import { utsPortfolio } from '../../data/portfolioData';
+---
+
+<PortfolioLayout
+  title={`Refleksi Pembelajaran • ${utsPortfolio.title}`}
+  description="Halaman refleksi profesional calon guru, evaluasi kekuatan-kelemahan, dan rencana tindak lanjut Siklus 1."
+  portfolioType="UTS"
+  activePage="refleksi"
+>
+  <div class="container section-spacing">
+    <div class="page-header">
+      <span class="badge">Tahap Selanjutnya</span>
+      <h1 class="page-title">Refleksi Pembelajaran — Siklus 1</h1>
+      <p class="page-desc">
+        Halaman ini disiapkan untuk menyajikan refleksi komprehensif calon guru yang mencakup model guru yang dituju, filosofi mengajar Informatika, evaluasi diri, dan rencana tindak lanjut nyata.
+      </p>
+    </div>
+
+    <div class="card placeholder-card">
+      <div class="placeholder-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 14 14"></polyline>
+        </svg>
+      </div>
+      <h2 class="placeholder-heading">Struktur Refleksi Guru (PRD Tahap 5)</h2>
+      <p class="placeholder-text">
+        Refleksi akan mendokumentasikan model guru profesional yang ingin diwujudkan, keyakinan filosofis dalam pembelajaran Informatika, evaluasi kekuatan dan keterbatasan pada Siklus 1, serta indikator keberhasilan rencana tindak lanjut.
+      </p>
+      <div class="placeholder-actions">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/uts/`} class="btn btn--primary">
+          ← Kembali ke Beranda UTS
+        </a>
+      </div>
+    </div>
+  </div>
+</PortfolioLayout>
+
+<style>
+  .page-header {
+    max-width: var(--reading-width);
+    margin-bottom: var(--space-8);
+  }
+
+  .page-title {
+    font-size: var(--text-3xl);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .page-desc {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .placeholder-card {
+    text-align: center;
+    padding: var(--space-12) var(--space-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 680px;
+    margin-inline: auto;
+  }
+
+  .placeholder-icon {
+    width: 72px;
+    height: 72px;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+  }
+
+  .placeholder-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .placeholder-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-6);
+  }
+
+  .placeholder-actions {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+

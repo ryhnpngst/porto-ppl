@@ -1,0 +1,61 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  portfolioType: 'UTS' | 'UAS';
+  activePage: 'beranda' | 'analisis-artefak' | 'refleksi';
+}
+
+const {
+  title,
+  description = 'E-Portfolio Praktik Pengalaman Lapangan (PPL) Mandiri Program PPG Calon Guru.',
+  portfolioType,
+  activePage
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- Google Fonts: Poppins (Regular 400, Medium 500, SemiBold 600, Bold 700) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Accessibility: Skip to Main Content Link -->
+    <a href="#main-content" class="skip-to-content">Menuju ke konten utama</a>
+
+    <!-- Sticky Accessible Header -->
+    <SiteHeader portfolioType={portfolioType} activePage={activePage} />
+
+    <!-- Main Content Area -->
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <!-- Standard Academic Footer -->
+    <SiteFooter portfolioType={portfolioType} />
+  </body>
+</html>
+
+<style>
+  #main-content:focus {
+    outline: none;
+  }
+</style>
+
