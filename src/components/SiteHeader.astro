@@ -16,16 +16,18 @@ const basePath = isUTS ? `${base}/uts` : `${base}/uas`;
 <header class="site-header">
   <div class="container header-container">
     <div class="brand-group">
-      <a href={`${basePath}/`} class="brand-link" aria-label={`E-Portfolio PPL Mandiri ${portfolioType}`}>
-        <span class="brand-logo-badge">{portfolioType}</span>
-        <div class="brand-titles">
-          <span class="brand-name">E-Portfolio PPL</span>
-          <span class="brand-sub">Praktik Mengajar Mandiri</span>
-        </div>
+      <a href={`${basePath}/`} class="brand-link" aria-label={`Beranda E-Portfolio PPL Mandiri ${portfolioType}`}>
+        <img
+          src={`${base}/images/logos/logo-uny.png`}
+          alt="Logo Universitas Negeri Yogyakarta"
+          class="brand-logo"
+        />
+        <img
+          src={`${base}/images/logos/logo-ppg.png`}
+          alt="Logo PPG Calon Guru"
+          class="brand-logo"
+        />
       </a>
-      <span class="cycle-pill" aria-label={`Fokus ${isUTS ? 'Siklus 1' : 'Siklus Terpilih'}`}>
-        {isUTS ? 'Siklus 1' : 'Siklus Terpilih'}
-      </span>
     </div>
 
     <!-- Mobile menu toggle button -->
@@ -109,52 +111,21 @@ const basePath = isUTS ? `${base}/uts` : `${base}/uas`;
     color: var(--color-text);
   }
 
-  .brand-logo-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-primary);
-    color: #ffffff;
-    font-weight: var(--font-bold);
-    font-size: var(--text-sm);
-    letter-spacing: 0.05em;
-    border-radius: var(--radius-md);
+  .brand-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform var(--transition-fast);
   }
 
-  .brand-titles {
-    display: flex;
-    flex-direction: column;
+  .brand-link:hover .brand-logo {
+    transform: scale(1.02);
   }
 
-  .brand-name {
-    font-weight: var(--font-bold);
-    font-size: var(--text-base);
-    color: var(--color-text);
-    line-height: 1.2;
-  }
-
-  .brand-sub {
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-    line-height: 1.2;
-  }
-
-  .cycle-pill {
-    display: none;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.7rem;
-    font-weight: var(--font-semibold);
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-active);
-    border-radius: var(--radius-pill);
-    border: 1px solid #c9d4e4;
-  }
-
-  @media (min-width: 640px) {
-    .cycle-pill {
-      display: inline-flex;
+  @media (max-width: 639px) {
+    .brand-logo {
+      height: 36px;
     }
   }
 
