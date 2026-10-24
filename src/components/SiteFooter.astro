@@ -10,7 +10,6 @@ const currentYear = new Date().getFullYear();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const isUTS = portfolioType === 'UTS';
 const basePath = isUTS ? `${base}/uts` : `${base}/uas`;
-const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
 ---
 
 <footer class="site-footer">
@@ -25,46 +24,23 @@ const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
         <p class="footer-desc">
           Dokumentasi, analisis artefak pembelajaran berbasis teori, dan refleksi evaluatif Praktik Pengalaman Lapangan (PPL) Mandiri Program PPG Calon Guru.
         </p>
-        <p class="student-meta">
-          <strong>{studentProfile.name}</strong><br />
-          <span>{studentProfile.program}</span><br />
-          <span class="sub-meta">{studentProfile.studyProgram}</span>
-        </p>
       </div>
 
       <!-- Col 2: Navigation -->
       <div class="footer-col">
         <h2 class="footer-heading">Navigasi Portofolio</h2>
         <ul class="footer-links">
-          <li><a href={`${basePath}/`}>Beranda ({portfolioType})</a></li>
+          <li><a href={`${basePath}/`}>Beranda</a></li>
           <li><a href={`${basePath}/analisis-artefak/`}>Analisis Artefak</a></li>
           <li><a href={`${basePath}/refleksi/`}>Refleksi Pembelajaran</a></li>
-          <li><a href={`${otherPath}/`} class="other-portfolio-link">Lihat Portofolio {isUTS ? 'UAS' : 'UTS'} →</a></li>
         </ul>
-      </div>
-
-      <!-- Col 3: Academic Notice & Privacy -->
-      <div class="footer-col">
-        <h2 class="footer-heading">Integritas & Privasi</h2>
-        <p class="privacy-note">
-          Seluruh artefak pembelajaran dan rekaman video disajikan semata-mata untuk tujuan penilaian akademik PPG Calon Guru. Informasi identitas pribadi peserta didik telah disamarkan (anonim) guna mematuhi etika perlindungan privasi data peserta didik.
-        </p>
-        <div class="contact-links">
-          <a href={`mailto:${studentProfile.email}`} class="footer-contact-link" aria-label="Kirim Email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-            </svg>
-            <span>{studentProfile.email}</span>
-          </a>
-        </div>
       </div>
     </div>
 
     <!-- Bottom bar -->
     <div class="footer-bottom">
       <p class="copyright">
-        © {currentYear} {studentProfile.name} • E-Portfolio PPL Mandiri PPG Calon Guru. Dikembangkan dengan Astro.
+        © {currentYear} {studentProfile.name}
       </p>
       <a href="#main-content" class="back-to-top">
         <span>Kembali ke atas</span>
@@ -94,8 +70,14 @@ const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
 
   @media (min-width: 768px) {
     .footer-grid {
-      grid-template-columns: 1.5fr 1fr 1.2fr;
-      gap: var(--space-10);
+      grid-template-columns: 1fr auto;
+      justify-content: space-between;
+      align-items: start;
+      gap: var(--space-12);
+    }
+
+    .footer-col--brand {
+      max-width: 560px;
     }
   }
 
@@ -125,17 +107,7 @@ const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
     font-size: var(--text-sm);
     color: var(--color-text-muted);
     line-height: 1.6;
-    margin-bottom: var(--space-4);
-  }
-
-  .student-meta {
-    font-size: var(--text-sm);
-    color: var(--color-text);
-    line-height: 1.5;
-  }
-
-  .sub-meta {
-    color: var(--color-text-muted);
+    margin-bottom: 0;
   }
 
   .footer-heading {
@@ -165,41 +137,6 @@ const otherPath = isUTS ? `${base}/uas` : `${base}/uts`;
 
   .footer-links a:hover {
     color: var(--color-primary);
-    text-decoration: underline;
-  }
-
-  .other-portfolio-link {
-    font-weight: var(--font-medium);
-    color: var(--color-primary) !important;
-  }
-
-  .privacy-note {
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    margin-bottom: var(--space-4);
-    background-color: #f7f9fc;
-    padding: var(--space-3);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .footer-contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-sm);
-    color: var(--color-primary);
-    text-decoration: none;
-  }
-
-  .footer-contact-link:hover {
     text-decoration: underline;
   }
 
