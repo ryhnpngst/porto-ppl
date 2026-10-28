@@ -86,12 +86,11 @@ export const utsPortfolio: PortfolioConfig = {
   teachingVideo: {
     title: "Video Pelaksanaan Praktik Mengajar Siklus 1",
     description:
-      "Video rekaman praktik pembelajaran mencakup tahapan apersepsi, pengorganisasian murid dalam kelompok belajar, penyelidikan mandiri, presentasi hasil, hingga asesmen formatif dan refleksi penutup.",
+      "Video rekaman praktik pembelajaran mencakup kegiatan apersepsi, penyampaian materi, implementasi materi melalui kegiatan praktik, serta pengerjaan LKPD untuk memperkuat pemahaman murid.",
     context: "Praktik Tatap Muka di Laboratorium Komputer / Kelas Informatika",
-    duration: "Video Pembelajaran (Kegiatan Awal, Inti, & Penutup)",
-    driveUrl:
-      "https://drive.google.com/file/d/1a2b3c4d5e_sample_video_uts/view?usp=sharing",
-    embedUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+    duration: "Video Pembelajaran",
+    driveUrl: "https://youtu.be/dkZ9_AhsiJ8",
+    embedUrl: "https://www.youtube-nocookie.com/embed/dkZ9_AhsiJ8",
   },
   supportingArtifacts: [
     {
