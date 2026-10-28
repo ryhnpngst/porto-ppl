@@ -9,11 +9,14 @@ interface Props {
 }
 
 const { title, category, description, context, driveUrl, analysisHref } = Astro.props;
+
+// Instrumen asesmen sudah terintegrasi di dalam RPP
+const displayCategory = category === 'Instrumen Asesmen' ? 'RPP' : category;
 ---
 
 <div class="card artifact-card">
   <div class="card-top">
-    <span class="badge">{category}</span>
+    <span class="badge">{displayCategory}</span>
   </div>
   <h3 class="card-title">{title}</h3>
   <p class="card-desc">{description}</p>

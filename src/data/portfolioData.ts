@@ -113,13 +113,13 @@ export const utsPortfolio: PortfolioConfig = {
     },
     {
       id: "art-03",
-      title: "Rubrik & Lembar Observasi Formatif",
-      category: "Instrumen Asesmen",
+      title: "Rancangan Pembelajaran (RPP / Modul Ajar)",
+      category: "RPP",
       description:
-        "Pedoman penilaian performa pemecahan masalah dan kerja sama tim.",
+        "Perencanaan pembelajaran lengkap yang telah memuat langkah-langkah kegiatan belajar serta instrumen asesmen terintegrasi.",
       context:
-        "Digunakan guru untuk memonitor perkembangan kompetensi murid saat diskusi.",
-      driveUrl: "https://drive.google.com/",
+        "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proses maupun hasil belajar murid.",
+      driveUrl: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
     },
     {
       id: "art-04",
@@ -191,12 +191,12 @@ export const uasPortfolio: PortfolioConfig = {
     },
     {
       id: "art-uas-03",
-      title: "Instrumen Penilaian Autentik & Peer-Assessment",
-      category: "Instrumen Asesmen",
+      title: "Rancangan Pembelajaran (RPP / Modul Ajar)",
+      category: "RPP",
       description:
-        "Formulir penilaian antarteman dan penilaian produk visualisasi data murid.",
-      context: "Digunakan pada sesi gelar karya / presentasi akhir proyek.",
-      driveUrl: "https://drive.google.com/",
+        "Perencanaan pembelajaran berbasis proyek (PjBL) yang memuat panduan aktivitas, rubrik penilaian, dan instrumen asesmen terintegrasi.",
+      context: "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proyek murid.",
+      driveUrl: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
     },
     {
       id: "art-uas-04",
