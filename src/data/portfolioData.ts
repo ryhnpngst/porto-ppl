@@ -5,7 +5,6 @@ export interface ArtifactItem {
   description: string;
   context: string;
   driveUrl: string;
-  embedUrl?: string;
 }
 
 export interface PortfolioConfig {
@@ -136,9 +135,9 @@ export const uasPortfolio: PortfolioConfig = {
   heroDescription:
     "Dokumentasi akademik praktik mengajar mandiri pada siklus terpilih (Siklus 3 dari rangkaian Siklus 2–4), dengan mengintegrasikan model Problem-Based Learning (PBL) untuk mengembangkan kemampuan pemecahan masalah dan penerapan konsep pemrograman Python dasar.",
   introText:
-    "Portofolio UAS ini memusatkan analisis pada siklus terbaik yang dipilih setelah evaluasi berkelanjutan dari siklus sebelumnya. Praktik ini menunjukkan peningkatan kemampuan scaffolding guru serta keterlibatan aktif murid dalam proyek analisis data nyata.",
+    "Portofolio UAS ini memusatkan analisis pada siklus terbaik yang dipilih setelah evaluasi berkelanjutan dari siklus sebelumnya. Praktik ini menunjukkan peningkatan kemampuan scaffolding guru serta keterlibatan aktif murid dalam pembelajaran pemrograman Python dasar kontekstual.",
   lessonPlan: {
-    title: "Modul Ajar / RPP Siklus 3: Analisis Data Kontekstual",
+    title: "Modul Ajar / RPP Siklus 3: Pemrograman Python Dasar",
     description:
       "Rancangan pembelajaran berbasis masalah yang mengintegrasikan latihan pemrograman Python dasar melalui analisis masalah kontekstual, penyusunan algoritma, penulisan kode, serta pengujian dan perbaikan program untuk kelas X.",
     topic: "Pemrograman Dasar Python",
