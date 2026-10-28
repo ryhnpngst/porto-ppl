@@ -1,42 +1,2156 @@
 ---
 import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
-import { uasPortfolio } from '../../data/portfolioData';
+import { uasPortfolio, studentProfile } from '../../data/portfolioData';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const berandaHref = `${base}/uas/`;
+const refleksiHref = `${base}/uas/refleksi/`;
+const rppDriveUrl = uasPortfolio.lessonPlan.driveUrl;
+
+const lkpdArtifact = uasPortfolio.supportingArtifacts.find((a) => a.id === 'art-uas-02');
+const lkpdDriveUrl = lkpdArtifact ? lkpdArtifact.driveUrl : 'https://drive.google.com/';
+
+const materiArtifact = uasPortfolio.supportingArtifacts.find((a) => a.id === 'art-uas-01');
+const materiDriveUrl = materiArtifact ? materiArtifact.driveUrl : 'https://drive.google.com/';
 ---
 
 <PortfolioLayout
-  title={`Analisis Artefak • ${uasPortfolio.title}`}
-  description="Halaman analisis mendalam artefak pembelajaran berbasis teori pedagogis untuk Siklus Terpilih (Siklus 3)."
+  title={`Analisis Artefak Pembelajaran • ${uasPortfolio.title}`}
+  description="Kajian dan analisis kritis mendalam terhadap RPP / Modul Ajar, Modul Materi, serta LKPD Informatika materi Pemrograman Python Dasar pada Siklus Terpilih (Siklus 3)."
   portfolioType="UAS"
   activePage="analisis-artefak"
 >
   <div class="container section-spacing">
-    <div class="page-header">
-      <span class="badge">Tahap Selanjutnya</span>
-      <h1 class="page-title">Analisis Artefak — Siklus Terpilih (Siklus 3)</h1>
+    <!-- Header Halaman -->
+    <header class="page-header">
+      <div class="header-badges">
+        <span class="badge badge--primary">UAS • Siklus 3</span>
+        <span class="badge">Analisis Artefak Akademik</span>
+      </div>
+      <h1 class="page-title">Analisis Artefak Pembelajaran</h1>
       <p class="page-desc">
-        Halaman ini disiapkan untuk memuat analisis mendalam artefak pembelajaran siklus terbaik (Modul Proyek, Rubrik Asesmen Kinerja, Template Spreadsheet, dan Hasil Karya Visualisasi Murid) berdasarkan kajian teori pedagogis.
+        Evaluasi kritis dan komprehensif terhadap tiga artefak utama pembelajaran Praktik Pengalaman Lapangan (PPL) Mandiri Siklus Terpilih (Siklus 3) di {studentProfile.school}. Analisis berfokus pada kesesuaian komponen, kekuatan pedagogis, area perbaikan berbasis teori, serta rekomendasi tindak lanjut terhadap perangkat perencanaan (RPP), modul bahan ajar mandiri, dan lembar kerja peserta didik (LKPD) materi Pemrograman Python Dasar.
       </p>
+    </header>
+
+    <!-- Tab Selector / Artifact Switcher -->
+    <div class="artifact-switcher-wrapper">
+      <div class="artifact-switcher" role="tablist" aria-label="Pilih Analisis Artefak Pembelajaran">
+        <button
+          type="button"
+          class="artifact-tab-btn active"
+          id="tab-btn-rpp"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-rpp"
+          data-tab="rpp"
+        >
+          <div class="tab-badge-group">
+            <span class="tab-badge">Artefak 01</span>
+            <span class="tab-type">Perencanaan Pembelajaran</span>
+          </div>
+          <span class="tab-title">Analisis RPP Informatika</span>
+        </button>
+
+        <button
+          type="button"
+          class="artifact-tab-btn"
+          id="tab-btn-materi"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-materi"
+          data-tab="materi"
+        >
+          <div class="tab-badge-group">
+            <span class="tab-badge tab-badge--secondary">Artefak 02</span>
+            <span class="tab-type">Bahan Ajar & Modul</span>
+          </div>
+          <span class="tab-title">Analisis Modul Materi</span>
+        </button>
+
+        <button
+          type="button"
+          class="artifact-tab-btn"
+          id="tab-btn-lkpd"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-lkpd"
+          data-tab="lkpd"
+        >
+          <div class="tab-badge-group">
+            <span class="tab-badge tab-badge--accent">Artefak 03</span>
+            <span class="tab-type">Lembar Aktivitas Murid</span>
+          </div>
+          <span class="tab-title">Analisis LKPD Informatika</span>
+        </button>
+      </div>
     </div>
 
-    <div class="card placeholder-card">
-      <div class="placeholder-icon">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-        </svg>
+    <!-- ========================================== -->
+    <!-- PANEL 1: ANALISIS RPP (ARTEFAK 01)        -->
+    <!-- ========================================== -->
+    <div id="panel-rpp" class="tab-panel active" role="tabpanel" aria-labelledby="tab-btn-rpp">
+      <div id="art-uas-03" class="tab-anchor"></div>
+      <div id="analisis-rpp" class="tab-anchor"></div>
+
+      <!-- Kartu Banner Identitas Artefak RPP -->
+      <section class="card artifact-hero-card" id="identitas-rpp">
+        <div class="artifact-hero-content">
+          <div class="artifact-hero-meta-top">
+            <span class="artifact-code">Artefak 01</span>
+            <span class="badge">Perencanaan Pembelajaran</span>
+          </div>
+          <h2 class="artifact-hero-title">Analisis RPP Informatika: Pemrograman Python Dasar</h2>
+          <p class="artifact-hero-desc">
+            Telaah mendalam terhadap Modul Ajar / Rencana Pelaksanaan Pembelajaran (RPP) yang mengintegrasikan model <em>Problem-Based Learning</em> (PBL) materi Pemrograman Python Dasar dengan konteks kejuruan Teknik Elektronika Industri kelas X SMK.
+          </p>
+
+          <div class="artifact-specs-grid">
+            <div class="spec-item">
+              <span class="spec-label">Mata Pelajaran & Fase</span>
+              <span class="spec-val">Informatika • Fase E (Kelas X)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Satuan Pendidikan</span>
+              <span class="spec-val">{studentProfile.school}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Konsentrasi Keahlian</span>
+              <span class="spec-val">Teknik Elektronika Industri</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Model Pembelajaran</span>
+              <span class="spec-val">Problem-Based Learning (PBL)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Alokasi Waktu</span>
+              <span class="spec-val">2 Pertemuan (8 Jam Pelajaran • 360 Menit)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Fokus Konsep</span>
+              <span class="spec-val">Sintaks Python, Input/Output, Operator, Percabangan, Debugging</span>
+            </div>
+          </div>
+
+          <div class="artifact-hero-actions">
+            <a href={rppDriveUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Buka File RPP</span>
+            </a>
+            <a href={`${berandaHref}#rancangan-pembelajaran`} class="btn btn--outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>Preview di Beranda</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigasi Cepat (Quick Jump RPP) -->
+      <nav class="quick-jump-nav" aria-label="Navigasi Cepat Aspek Analisis RPP">
+        <span class="quick-jump-label">Pintasan Aspek RPP:</span>
+        <div class="quick-jump-pills">
+          <a href="#aspek-rpp-1" class="jump-pill">1. Identitas & Administrasi</a>
+          <a href="#aspek-rpp-2" class="jump-pill">2. Capaian & Tujuan</a>
+          <a href="#aspek-rpp-3" class="jump-pill">3. Materi Ajar</a>
+          <a href="#aspek-rpp-4" class="jump-pill">4. Langkah PBL</a>
+          <a href="#aspek-rpp-5" class="jump-pill">5. Asesmen & Evaluasi</a>
+          <a href="#kesimpulan-umum-rpp" class="jump-pill jump-pill--highlight">6. Kesimpulan Umum RPP</a>
+        </div>
+      </nav>
+
+      <!-- Stack Pembahasan 6 Aspek Analisis RPP -->
+      <div class="analysis-sections-stack">
+        
+        <!-- ASPEK RPP 1 -->
+        <article class="card analysis-card" id="aspek-rpp-1">
+          <div class="aspect-header">
+            <div class="aspect-number">01</div>
+            <div>
+              <span class="aspect-tag">Komponen Perencanaan</span>
+              <h2 class="aspect-title">Komponen Identitas dan Administrasi</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              RPP telah mencantumkan identitas utama, meliputi nama penyusun, satuan pendidikan, fase/kelas/semester, mata pelajaran, elemen pembelajaran, alokasi waktu, serta media, alat, dan bahan. RPP disusun oleh Rayhan Pangestu Wibowo untuk mata pelajaran Informatika kelas X Fase E Semester 2 di SMK Negeri 3 Yogyakarta, Konsentrasi Keahlian Teknik Elektronika Industri.
+            </p>
+            <p class="block-text">
+              Dokumen juga memuat karakteristik murid, karakteristik materi pelajaran, dimensi Profil Lulusan, lintas disiplin ilmu, serta komponen desain pembelajaran. Alokasi waktu direncanakan selama dua pertemuan, masing-masing empat jam pelajaran dengan durasi 45 menit per jam pelajaran.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Identitas satuan pendidikan, penyusun, kelas, semester, bidang keahlian, dan materi pembelajaran telah dicantumkan secara lengkap.</li>
+              <li>Karakteristik murid mempertimbangkan pengalaman belajar yang beragam, terutama dalam penggunaan komputer dan pemrograman.</li>
+              <li>Karakteristik materi menjelaskan konsep Python yang akan dipelajari, mulai dari sintaks dasar hingga percabangan dan debugging.</li>
+              <li>Konteks Teknik Elektronika digunakan untuk menghubungkan pembelajaran Informatika dengan penerapan di bidang keahlian, seperti perhitungan daya listrik, sistem kipas otomatis, dan pemeriksaan tegangan baterai.</li>
+              <li>Dokumen dilengkapi lampiran asesmen awal, acuan jawaban LKPD, rubrik keterampilan, dan rubrik sikap.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Alokasi waktu perlu dinyatakan secara lebih tegas:</strong> Keterangan “2 × 4 Jpl (@45 menit)” dapat dituliskan sebagai dua pertemuan, masing-masing 4 JP atau 180 menit, dengan total waktu pembelajaran 360 menit. Pembagian kegiatan awal 15 menit, inti 150 menit, dan penutup 15 menit telah sesuai dengan alokasi setiap pertemuan.
+              </li>
+              <li>
+                <strong>Kelengkapan komponen identitas perlu diperiksa kembali:</strong> Bagian awal mencantumkan format nomor dokumen dan revisi, sedangkan bagian RPP memiliki kolom nomor yang masih kosong. Sebaiknya digunakan format administrasi yang konsisten pada seluruh bagian dokumen.
+              </li>
+              <li>
+                <strong>Dimensi Profil Lulusan belum seluruhnya dipetakan ke kegiatan dan asesmen:</strong> RPP mencantumkan delapan dimensi Profil Lulusan, tetapi rubrik sikap secara khusus menilai penalaran kritis, kolaborasi, kemandirian, dan komunikasi. Dimensi yang menjadi prioritas dalam pembelajaran sebaiknya ditandai dengan jelas dan dihubungkan dengan indikator yang dinilai.
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Identitas dan Administrasi:</strong> Komponen utama RPP sudah tersedia dan sesuai dengan konteks pembelajaran Informatika di SMK. Perbaikan terutama diperlukan pada kelengkapan administrasi, penyederhanaan identitas, serta konsistensi pemetaan dimensi Profil Lulusan dengan kegiatan dan asesmen.
+          </div>
+        </article>
+
+        <!-- ASPEK RPP 2 -->
+        <article class="card analysis-card" id="aspek-rpp-2">
+          <div class="aspect-header">
+            <div class="aspect-number">02</div>
+            <div>
+              <span class="aspect-tag">Komponen Kompetensi</span>
+              <h2 class="aspect-title">Komponen Perumusan Capaian dan Tujuan Pembelajaran</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              RPP mencantumkan Capaian Pembelajaran (CP), enam tujuan pembelajaran, dan tiga kelompok Kriteria Ketercapaian Tujuan Pembelajaran (KKTP).
+            </p>
+            <p class="block-text">
+              Tujuan pembelajaran mencakup kemampuan menggunakan sintaks dasar Python, variabel, tipe data, input(), operator aritmatika dan perbandingan, serta percabangan if, if-else, dan if-elif-else. Murid juga diarahkan untuk menyusun pseudocode, menerjemahkannya menjadi program Python sederhana, serta menguji dan memperbaiki kesalahan program.
+            </p>
+            <p class="block-text">
+              KKTP dikelompokkan menjadi tiga bagian, yaitu penulisan program yang menerima input dan menghasilkan output, penerapan operator dan percabangan, serta penyusunan pseudocode yang diterjemahkan menjadi program dan diuji.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Tujuan pembelajaran menggunakan kata kerja yang menunjukkan kemampuan yang dapat diamati, seperti menggunakan, menerapkan, menuliskan, menerjemahkan, menguji, dan memperbaiki.</li>
+              <li>Tujuan pembelajaran mencakup pengetahuan dan keterampilan praktik pemrograman.</li>
+              <li>CP diterjemahkan menjadi aktivitas konkret melalui pembuatan program, pengujian hasil, dan debugging.</li>
+              <li>KKTP telah disediakan sebagai acuan untuk menilai ketercapaian pembelajaran.</li>
+              <li>Tujuan pembelajaran relevan dengan konteks Teknik Elektronika melalui program perhitungan daya listrik, kipas otomatis, dan tantangan pemrograman kontekstual.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Kriteria ketercapaian belum sepenuhnya terukur:</strong> KKTP telah membagi kemampuan menjadi tiga kelompok, tetapi belum mencantumkan batas keberhasilan yang jelas untuk setiap kemampuan. Contohnya, kemampuan menerapkan percabangan belum disertai indikator yang menjelaskan seberapa tepat program harus berjalan atau berapa banyak kasus uji yang harus berhasil.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan indikator yang terukur, misalnya program dapat menerima input, melakukan perhitungan atau pemeriksaan kondisi dengan benar, menghasilkan output sesuai masalah, serta lulus minimal tiga kasus pengujian.
+                </div>
+              </li>
+              <li>
+                <strong>Pemetaan tujuan pembelajaran dan KKTP masih bersifat umum:</strong> Enam tujuan pembelajaran dirangkum dalam tiga kelompok KKTP tanpa pemetaan langsung yang menunjukkan indikator untuk setiap tujuan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Membuat tabel yang menghubungkan tujuan pembelajaran, indikator ketercapaian, kegiatan LKPD, bukti kerja, dan kriteria penilaian. Dengan demikian, guru dapat mengetahui bukti yang harus dikumpulkan untuk memastikan setiap tujuan telah tercapai.
+                </div>
+              </li>
+              <li>
+                <strong>Cakupan tujuan pembelajaran cukup luas untuk dua pertemuan:</strong> Materi meliputi sintaks Python, tipe data, konversi input, operator, tiga bentuk percabangan, pseudocode, pengujian, dan debugging. Murid yang belum memiliki pengalaman pemrograman berpotensi membutuhkan waktu lebih lama untuk memahami seluruh konsep tersebut.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menetapkan kompetensi inti pada setiap pertemuan. Pertemuan pertama dapat diprioritaskan pada input/output, variabel, tipe data, dan operator aritmatika. Pertemuan kedua difokuskan pada operator perbandingan, percabangan, penerjemahan pseudocode, dan pengujian program.
+                </div>
+              </li>
+              <li>
+                <strong>Kriteria kemandirian belum dibedakan dari keberhasilan produk:</strong> Tujuan pembelajaran menyebutkan penerjemahan pseudocode menjadi program secara mandiri, sedangkan kegiatan praktik memperbolehkan murid berdiskusi dengan teman. Kedua hal tersebut tidak bertentangan, tetapi bukti penguasaan individual perlu tetap tersedia.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memberikan pemeriksaan individual singkat, misalnya meminta setiap murid menjelaskan logika program atau mengubah satu kondisi pada program yang telah dibuat.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Tujuan dan Kompetensi:</strong> CP, tujuan pembelajaran, dan KKTP telah tersedia serta sesuai dengan materi Python Dasar. Perbaikan diperlukan pada keterukuran indikator, pemetaan tujuan dengan asesmen, prioritas materi, dan pembuktian penguasaan individual.
+          </div>
+        </article>
+
+        <!-- ASPEK RPP 3 -->
+        <article class="card analysis-card" id="aspek-rpp-3">
+          <div class="aspect-header">
+            <div class="aspect-number">03</div>
+            <div>
+              <span class="aspect-tag">Komponen Konten</span>
+              <h2 class="aspect-title">Komponen Materi Ajar dan Konten</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Materi pembelajaran mencakup pengenalan Python dan cara menjalankan program, penggunaan print(), variabel dan tipe data dasar, input menggunakan input(), operator aritmatika, operator perbandingan, percabangan, serta penerjemahan pseudocode menjadi program yang dapat diuji dan diperbaiki.
+            </p>
+            <p class="block-text">
+              Materi didukung oleh Modul Pemrograman Python Dasar dan LKPD. Konteks yang digunakan meliputi penghitungan daya listrik dengan rumus (P = V &times; I), sistem kipas otomatis berdasarkan suhu, pemeriksaan tegangan baterai, lampu otomatis, dan permasalahan sederhana lain yang berkaitan dengan Teknik Elektronika.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Materi disusun secara bertahap dari sintaks dasar menuju penerapan logika pemrograman.</li>
+              <li>Contoh program kontekstual membantu murid memahami manfaat Python dalam menyelesaikan masalah sederhana.</li>
+              <li>Penggunaan float(input()) memberikan pengenalan terhadap kebutuhan konversi tipe data ketika melakukan perhitungan numerik.</li>
+              <li>Penerapan operator perbandingan dan percabangan melatih murid menyusun logika pengambilan keputusan terstruktur.</li>
+              <li>Hubungan antara pseudocode dan program Python membantu murid memahami bahwa kode merupakan penerjemahan langkah penyelesaian masalah.</li>
+              <li>Pengujian dan debugging diperkenalkan sebagai bagian dari proses pemrograman, bukan hanya sebagai kegiatan tambahan setelah program selesai.</li>
+              <li>Materi mengintegrasikan Informatika dengan Matematika dan bidang produktif Teknik Elektronika.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Cakupan materi cukup padat:</strong> Dalam dua pertemuan, murid mempelajari beberapa konsep sekaligus, mulai dari tipe data hingga percabangan dan debugging. Hal ini dapat menjadi tantangan bagi murid yang baru mengenal pemrograman.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memberikan contoh bertahap dari kode yang sudah jadi, kode rumpang yang perlu dilengkapi, hingga penyusunan program secara mandiri. Tantangan yang lebih kompleks dapat digunakan sebagai pengayaan.
+                </div>
+              </li>
+              <li>
+                <strong>Penjelasan tipe data dan konversi input perlu didukung latihan pembeda:</strong> RPP sudah menjelaskan bahwa nilai yang diperoleh dari input() bertipe teks dan perlu dikonversi menjadi angka untuk perhitungan. Namun, murid memerlukan latihan untuk membedakan penggunaan str, int, float, dan boolean.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan contoh sederhana yang memperlihatkan perbedaan hasil ketika input digunakan sebagai teks dan ketika dikonversi menjadi angka. Latihan dapat dilengkapi dengan pertanyaan tentang alasan penggunaan int() atau float().
+                </div>
+              </li>
+              <li>
+                <strong>Konteks Teknik Elektronika perlu dibedakan antara simulasi dan penerapan nyata:</strong> Perhitungan daya listrik dan kipas otomatis sudah relevan untuk pembelajaran, tetapi program yang dibuat hanya mensimulasikan proses melalui input dan output di komputer.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menjelaskan bahwa program kipas otomatis dalam LKPD merupakan simulasi logika kendali, bukan sistem yang secara langsung membaca sensor atau mengendalikan perangkat keras.
+                </div>
+              </li>
+              <li>
+                <strong>Materi operator dan percabangan perlu menekankan kasus nilai batas:</strong> RPP sudah menggunakan suhu 25&deg;C, 30&deg;C, dan 35&deg;C untuk menguji sistem kipas. Pengujian tersebut baik untuk mengenalkan kondisi &gt;=, tetapi murid juga perlu memahami perbedaan &gt; dan &gt;=.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan pertanyaan penuntun mengenai hasil yang diharapkan ketika suhu tepat berada pada nilai ambang batas. Pendekatan ini membantu murid memahami alasan pemilihan operator, bukan hanya menghafal sintaks.
+                </div>
+              </li>
+              <li>
+                <strong>Konteks lintas disiplin ilmu belum dijelaskan secara terperinci:</strong> Matematika dan Teknik Elektronika telah dicantumkan sebagai disiplin pendukung. Hubungannya terlihat melalui rumus daya listrik dan pemeriksaan tegangan, tetapi penerapan konsep Matematika dalam pengujian logika masih dapat diperjelas.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Mengaitkan perhitungan numerik, perbandingan nilai, dan penentuan batas kondisi dengan konsep Matematika yang relevan.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Materi:</strong> Materi sudah relevan, bertahap, dan kontekstual untuk murid kelas X Teknik Elektronika. Perbaikan perlu difokuskan pada pengaturan kedalaman materi, dukungan bagi pemula, penegasan batas simulasi, dan penguatan pemahaman logika melalui kasus nilai batas.
+          </div>
+        </article>
+
+        <!-- ASPEK RPP 4 -->
+        <article class="card analysis-card" id="aspek-rpp-4">
+          <div class="aspect-header">
+            <div class="aspect-number">04</div>
+            <div>
+              <span class="aspect-tag">Komponen Pedagogis</span>
+              <h2 class="aspect-title">Komponen Strategi, Model, dan Langkah Pembelajaran</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              RPP menggunakan model <strong>Problem-Based Learning (PBL)</strong> dengan masalah kontekstual yang berkaitan dengan Teknik Elektronika. Pada pertemuan pertama, murid diarahkan untuk memahami persoalan penghitungan daya listrik secara otomatis berdasarkan nilai tegangan dan arus. Pada pertemuan kedua, murid menganalisis permasalahan kipas yang harus menyala ketika suhu mencapai 30&deg;C atau lebih.
+            </p>
+            <p class="block-text">
+              Langkah pembelajaran mencakup kegiatan awal, inti, dan penutup. Pada kegiatan inti, pembelajaran dibagi menjadi memahami, mengaplikasi, dan merefleksi. Aktivitas meliputi pengamatan contoh pseudocode dan program, praktik pemrograman, pengujian hasil, perbaikan kesalahan, serta presentasi hasil kerja.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Masalah yang diberikan relevan dengan kehidupan nyata dan konsentrasi keahlian murid.</li>
+              <li>Pembelajaran dimulai dari persoalan konkret sebelum murid menulis kode program Python.</li>
+              <li>Murid memperoleh kesempatan untuk menyusun pseudocode, menerjemahkannya menjadi program, menguji hasil, dan memperbaiki kesalahan.</li>
+              <li>Guru memberikan pendampingan langsung ketika murid mengalami kesulitan, seperti konversi tipe data, penulisan tanda kutip, indentasi, dan penggunaan operator perbandingan.</li>
+              <li>Kegiatan praktik memberikan ruang bagi murid untuk belajar mandiri sekaligus berdiskusi dengan teman sebaya.</li>
+              <li>Presentasi program dan tabel pengujian memberikan kesempatan untuk menyampaikan hasil serta menerima tanggapan konstruktif.</li>
+              <li>Kegiatan refleksi membantu murid mengenali kesalahan yang sering terjadi dan memahami cara memperbaikinya.</li>
+              <li>Prinsip pembelajaran berkesadaran, bermakna, dan menggembirakan telah dicantumkan dalam perencanaan kegiatan.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Sintaks PBL belum seluruhnya ditampilkan secara eksplisit:</strong> RPP telah mencantumkan orientasi pada masalah, pengorganisasian dan bimbingan penyelidikan, pengembangan hasil, serta analisis dan evaluasi. Namun, urutan sintaks PBL belum ditandai secara konsisten pada setiap kegiatan, khususnya pada pertemuan pertama yang lebih banyak memuat demonstrasi guru dan latihan dasar.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memperjelas lima tahapan PBL (Orientasi masalah, Organisasi belajar, Pembimbingan penyelidikan, Pengembangan & penyajian hasil, serta Analisis & evaluasi) secara eksplisit pada setiap alur sintaks pembelajaran.
+                </div>
+              </li>
+              <li>
+                <strong>Masalah pemantik pada pertemuan pertama perlu diikuti proses penyelidikan yang lebih jelas:</strong> Pertanyaan tentang penghitungan daya listrik telah digunakan untuk mengawali pembelajaran, tetapi kegiatan selanjutnya langsung beralih ke contoh pseudocode dan demonstrasi Python.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memberikan waktu bagi murid untuk mengidentifikasi informasi yang dibutuhkan, menentukan input dan output, serta memperkirakan langkah penyelesaian sebelum guru menunjukkan contoh program.
+                </div>
+              </li>
+              <li>
+                <strong>Pengorganisasian kerja murid belum dijelaskan secara rinci:</strong> Murid diperbolehkan berdiskusi dengan teman dan bekerja berpasangan pada pertemuan kedua, tetapi pembagian peran dan tanggung jawab belum dicantumkan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Membagi peran secara sederhana dan bergantian, misalnya satu murid menyusun kode dan murid lainnya memeriksa logika serta hasil pengujian (pair programming). Pada tugas berikutnya, kedua murid dapat bertukar peran.
+                </div>
+              </li>
+              <li>
+                <strong>Pemerataan partisipasi dan presentasi perlu diperhatikan:</strong> RPP menyebutkan beberapa murid atau kelompok menunjukkan hasil program. Kegiatan ini efisien, tetapi belum menjamin semua murid memperoleh kesempatan yang sama untuk menjelaskan solusi atau menunjukkan pemahaman individual.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menggunakan pemeriksaan singkat terhadap hasil setiap murid, presentasi bergiliran, atau pertukaran hasil kerja antarpasangan (peer-review). Guru juga dapat meminta murid menjelaskan alasan penggunaan kondisi tertentu dalam program.
+                </div>
+              </li>
+              <li>
+                <strong>Diferensiasi pembelajaran masih bersifat umum:</strong> RPP menyediakan bimbingan langsung, bantuan teman sebaya, dan tugas pengayaan. Namun, bentuk dukungan berdasarkan kesulitan spesifik murid belum dirinci.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan template pseudocode, contoh kode rumpang, panduan langkah demi langkah, dan daftar pemeriksaan kesalahan umum. Murid yang sudah menguasai materi dapat diberi tantangan tambahan, seperti menggunakan lebih dari dua kondisi pada if-elif-else.
+                </div>
+              </li>
+              <li>
+                <strong>Pemanfaatan media digital perlu diselaraskan dengan langkah pembelajaran:</strong> Bagian pemanfaatan digital mencantumkan Quizizz, editor Python, dan Google Classroom/Drive. Akan tetapi, jenis editor yang digunakan, prosedur pengumpulan tugas, dan penggunaan setiap media pada masing-masing pertemuan belum dijelaskan secara rinci.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Mencantumkan editor Python yang akan digunakan serta menjelaskan kapan murid menulis kode, menyimpan file .py, mengambil tangkapan layar hasil, dan mengumpulkan tugas.
+                </div>
+              </li>
+              <li>
+                <strong>Aktivitas refleksi perlu dihubungkan dengan tindak lanjut:</strong> Murid telah diminta merefleksikan kesalahan yang ditemui dan cara memperbaikinya. Namun, belum dijelaskan bagaimana guru menggunakan hasil refleksi untuk menentukan materi yang perlu diulang atau murid yang memerlukan pendampingan tambahan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Mengakhiri refleksi dengan pertanyaan spesifik, misalnya bagian kode mana yang paling sulit, kesalahan apa yang ditemukan, dan bagaimana cara memperbaikinya. Jawaban murid dapat menjadi dasar untuk menentukan penguatan atau pengayaan.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Strategi dan Langkah Pembelajaran:</strong> RPP telah mengintegrasikan masalah kontekstual, praktik pemrograman, pendampingan guru, pengujian, dan refleksi. Perbaikan utama adalah memperjelas penerapan lima sintaks PBL, proses penyelidikan murid, pembagian peran, diferensiasi, dan pemanfaatan hasil refleksi.
+          </div>
+        </article>
+
+        <!-- ASPEK RPP 5 -->
+        <article class="card analysis-card" id="aspek-rpp-5">
+          <div class="aspect-header">
+            <div class="aspect-number">05</div>
+            <div>
+              <span class="aspect-tag">Komponen Evaluasi</span>
+              <h2 class="aspect-title">Komponen Asesmen dan Evaluasi</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              RPP mencantumkan asesmen awal, asesmen formatif, kuis akhir, serta rubrik penilaian keterampilan dan sikap. Asesmen awal terdiri atas lima soal pilihan ganda yang menguji pemahaman tentang print(), tipe data hasil input(), perhitungan sederhana, operator perbandingan, dan indentasi.
+            </p>
+            <p class="block-text">
+              Asesmen formatif diintegrasikan dalam LKPD dan mencakup hasil praktik program pertama, perhitungan daya listrik, sistem kipas otomatis, tantangan Teknik Elektronika, pengujian, perbaikan kesalahan, serta kelengkapan hasil kerja. Rubrik sikap menilai penalaran kritis, kolaborasi, kemandirian, dan komunikasi.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Asesmen awal telah disediakan beserta kunci jawaban untuk membantu guru memeriksa pengetahuan awal murid.</li>
+              <li>Hasil praktik menjadi bukti konkret keterampilan pemrograman, bukan hanya jawaban tertulis teoritis.</li>
+              <li>Penilaian mencakup proses penyusunan pseudocode, penulisan program, pengujian, dan perbaikan kesalahan (debugging).</li>
+              <li>Rubrik keterampilan menggunakan empat tingkat penilaian objektif, mulai dari skor 1 hingga skor 4.</li>
+              <li>Praktik sistem kipas dilengkapi kasus pengujian pada suhu 25&deg;C, 30&deg;C, dan 35&deg;C untuk memeriksa kebenaran logika ambang batas.</li>
+              <li>Tantangan Teknik Elektronika mengharuskan murid menguji program dengan minimal tiga data input berbeda.</li>
+              <li>Rubrik sikap mencakup kemampuan berpikir kritis, berkolaborasi, bekerja mandiri, dan menyampaikan hasil kerja.</li>
+              <li>Bobot penilaian keterampilan sebesar 80% dan sikap sebesar 20% telah dicantumkan secara eksplisit.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Fungsi asesmen sumatif belum dijelaskan secara tegas:</strong> Dokumen menyebut asesmen formatif/sumatif dan kuis akhir, tetapi belum menjelaskan secara terperinci instrumen mana yang digunakan untuk mengambil keputusan akhir mengenai ketercapaian tujuan pembelajaran.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menjelaskan fungsi setiap instrumen. Praktik dan umpan balik selama proses digunakan sebagai asesmen formatif, sedangkan kuis akhir atau tugas individual ditetapkan sebagai asesmen sumatif.
+                </div>
+              </li>
+              <li>
+                <strong>Pemetaan tujuan pembelajaran dengan rubrik belum ditampilkan secara langsung:</strong> Rubrik menilai enam aspek utama, tetapi belum terdapat tabel yang menghubungkan setiap aspek dengan tujuan pembelajaran dan KKTP yang relevan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Membuat matriks yang menunjukkan tujuan pembelajaran, bukti kerja yang dinilai, indikator keberhasilan, dan bobot penilaian agar seluruh tujuan memiliki bukti evaluasi yang sah.
+                </div>
+              </li>
+              <li>
+                <strong>Asesmen awal belum secara langsung mengukur seluruh kemampuan prasyarat:</strong> Lima soal telah memeriksa konsep Python dasar, tetapi belum mengukur kemampuan membaca pseudocode atau urutan logika algoritma yang menjadi fondasi pembelajaran.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan soal sederhana untuk menafsirkan pseudocode atau menentukan output berdasarkan urutan instruksi sebelum praktik dimulai.
+                </div>
+              </li>
+              <li>
+                <strong>Penilaian individual perlu diperkuat:</strong> Murid diperbolehkan berdiskusi dengan teman dan sebagian tugas dikerjakan berpasangan. Kondisi ini memungkinkan murid memperoleh bantuan, tetapi belum selalu menunjukkan tingkat penguasaan masing-masing individu.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan pemeriksaan individual singkat, seperti meminta murid menulis ulang satu bagian kode, menjelaskan alur logika percabangan, atau memperbaiki satu kesalahan program secara mandiri.
+                </div>
+              </li>
+              <li>
+                <strong>Kriteria ketercapaian dan tindak lanjut perlu dibuat lebih jelas:</strong> Rubrik telah menyediakan deskripsi kinerja skor 1–4, tetapi belum menjelaskan skor minimal ketercapaian atau bagaimana nilai digunakan untuk menentukan remedial dan pengayaan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menetapkan kriteria batas minimal kelulusan untuk setiap tujuan pembelajaran beserta format program remedial terstruktur.
+                </div>
+              </li>
+              <li>
+                <strong>Kelengkapan dan konsistensi tabel rubrik perlu diperiksa:</strong> Rumus nilai keterampilan menggunakan total skor perolehan dibagi 24 (sesuai enam aspek dengan skor maksimal 4). Namun tata letak deskripsi pada naskah asli perlu dirapikan agar tidak memicu perbedaan penafsiran antarpenilai.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Merapikan tabel rubrik dengan kolom aspek, skor 4, skor 3, skor 2, dan skor 1 secara konsisten dan terdistribusi jelas.
+                </div>
+              </li>
+              <li>
+                <strong>Penggunaan kuis akhir belum disertai kisi-kisi atau kriteria yang terperinci:</strong> RPP menyebutkan kuis akhir melalui lisan, Quizizz, atau Google Form, tetapi tidak menjelaskan jumlah soal, cakupan materi, maupun hubungan hasilnya dengan KKTP.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menentukan materi yang diukur (konversi tipe data, operator, percabangan, tracing kode) beserta rubrik penskorannya.
+                </div>
+              </li>
+              <li>
+                <strong>Kelengkapan bukti kerja perlu disesuaikan dengan tujuan penilaian:</strong> Murid diminta mengumpulkan empat file program, tangkapan layar hasil, dan LKPD. Tangkapan layar saja belum tentu cukup untuk memeriksa logika program secara menyeluruh.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menjadikan file .py sebagai bukti utama penulisan kode, sedangkan tangkapan layar berfungsi sebagai dokumentasi hasil eksekusi terminal.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Asesmen:</strong> Komponen asesmen sudah cukup lengkap karena mencakup kemampuan awal, keterampilan praktik, sikap, dan hasil kerja. Perbaikan perlu difokuskan pada kejelasan fungsi asesmen sumatif, pemetaan tujuan dan rubrik, pemeriksaan penguasaan individual, konsistensi tabel penilaian, serta kriteria remedial dan pengayaan.
+          </div>
+        </article>
+
+        <!-- KESIMPULAN UMUM RPP -->
+        <article class="card analysis-card analysis-card--conclusion" id="kesimpulan-umum-rpp">
+          <div class="aspect-header">
+            <div class="aspect-number aspect-number--primary">06</div>
+            <div>
+              <span class="aspect-tag">Sintesis Komprehensif Perencanaan</span>
+              <h2 class="aspect-title">Kesimpulan Umum & Rekomendasi Tindak Lanjut RPP</h2>
+            </div>
+          </div>
+
+          <div class="conclusion-content">
+            <p class="block-text">
+              Berdasarkan hasil analisis, RPP Informatika materi Pemrograman Python Dasar telah memuat komponen utama yang cukup lengkap, mulai dari identitas, karakteristik murid, capaian dan tujuan pembelajaran, materi ajar, langkah pembelajaran, hingga asesmen dan rubrik penilaian. RPP juga menunjukkan upaya mengintegrasikan model <strong>Problem-Based Learning (PBL)</strong> melalui permasalahan kontekstual yang dekat dengan bidang Teknik Elektronika, seperti penghitungan daya listrik dan sistem kipas otomatis berdasarkan suhu.
+            </p>
+            <p class="block-text">
+              Kekuatan utama RPP terletak pada keterkaitan antara konsep dan praktik. Murid tidak hanya mempelajari sintaks Python, tetapi juga menyusun pseudocode, menerjemahkannya menjadi program, menguji hasil dengan beberapa data, serta memperbaiki kesalahan yang ditemukan. Aktivitas tersebut mendukung pengembangan penalaran logis, kemandirian, ketelitian, dan kemampuan pemecahan masalah.
+            </p>
+            <p class="block-text">
+              Meskipun demikian, beberapa komponen masih perlu diperbaiki agar perencanaan lebih terarah dan mudah dilaksanakan. Hal yang menjadi perhatian utama meliputi keterukuran tujuan dan KKTP, kejelasan penerapan sintaks PBL, pemanfaatan hasil asesmen awal, dukungan bagi murid dengan kemampuan yang beragam, serta konsistensi rubrik penilaian. Selain itu, fungsi asesmen sumatif dan bukti penguasaan individual perlu diperjelas agar hasil kerja yang dikumpulkan benar-benar menggambarkan kemampuan masing-masing murid.
+            </p>
+            <p class="block-text">
+              Dengan melakukan perbaikan tersebut, RPP akan menjadi perangkat pembelajaran yang lebih selaras antara tujuan, aktivitas, bukti belajar, dan tindak lanjut. Fokus perbaikan paling penting adalah memastikan setiap tujuan pembelajaran memiliki kegiatan yang sesuai, kriteria ketercapaian yang dapat diamati, dan instrumen penilaian yang tepat. Dengan demikian, pembelajaran Python Dasar melalui PBL dapat membantu murid memahami konsep sekaligus menggunakannya untuk menyelesaikan masalah sederhana yang relevan dengan bidang keahliannya.
+            </p>
+
+            <div class="synthesis-takeaways">
+              <h3 class="takeaways-title">Intisari Rekomendasi Perbaikan Utama RPP:</h3>
+              <div class="takeaways-grid">
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Keterukuran KKTP & Matriks Asesmen</span>
+                  <p>Menetapkan ambang batas keberhasilan spesifik (lulus minimal 3 kasus uji) serta memetakan 6 tujuan pembelajaran ke rubrik penilaian kinerja secara langsung.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Eksplisitasi 5 Sintaks PBL</span>
+                  <p>Menegaskan fase orientasi masalah kontekstual pada pertemuan pertama sebelum beralih ke demonstrasi guru dan latihan kode dasar.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Scaffolding & Diferensiasi Pembelajaran</span>
+                  <p>Menyediakan panduan kode bertahap (kode jadi &rarr; kode rumpang &rarr; mandiri), lembar bantuan kesalahan umum, dan tantangan pengayaan if-elif-else.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Akuntabilitas Individual & Bukti Kode .py</span>
+                  <p>Menerapkan pemeriksaan pemahaman mandiri berkala di sela kerja berpasangan serta menetapkan file kode .py sebagai bukti otentik penguasaan logika.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
-      <h2 class="placeholder-heading">Struktur Analisis Artefak (PRD Tahap 5)</h2>
-      <p class="placeholder-text">
-        Setiap artefak pada siklus terpilih dianalisis secara kritis dengan mengaitkan bukti empiris hasil belajar murid dengan teori Project-Based Learning dan konstruktivisme.
-      </p>
-      <div class="placeholder-actions">
-        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/uas/`} class="btn btn--primary">
-          ← Kembali ke Beranda UAS
-        </a>
+
+      <!-- Kartu Transisi ke Modul Materi / LKPD -->
+      <div class="next-artifact-card">
+        <div class="next-artifact-info">
+          <span class="badge badge--primary">Artefak Selanjutnya</span>
+          <h3 class="next-artifact-title">Analisis Modul Materi: Pemrograman Python Dasar</h3>
+          <p class="next-artifact-desc">Lanjutkan membaca evaluasi kritis 8 aspek bahan ajar mandiri Informatika kelas X SMK yang mencakup 14 bagian materi pembelajaran (Bagian A sampai N).</p>
+        </div>
+        <div class="next-artifact-actions">
+          <button type="button" class="btn btn--primary switch-to-materi-btn">
+            <span>Buka Modul Materi (Artefak 02)</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="btn btn--outline switch-to-lkpd-btn">
+            <span>Buka LKPD (Artefak 03)</span>
+          </button>
+        </div>
       </div>
     </div>
+
+
+    <!-- ========================================== -->
+    <!-- PANEL 2: ANALISIS MODUL MATERI (ARTEFAK 02) -->
+    <!-- ========================================== -->
+    <div id="panel-materi" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-materi">
+      <div id="art-uas-01" class="tab-anchor"></div>
+      <div id="analisis-materi" class="tab-anchor"></div>
+
+      <!-- Kartu Banner Identitas Artefak Modul Materi -->
+      <section class="card artifact-hero-card" id="identitas-materi">
+        <div class="artifact-hero-content">
+          <div class="artifact-hero-meta-top">
+            <span class="artifact-code">Artefak 02</span>
+            <span class="badge">Bahan Ajar & Modul Bacaan</span>
+          </div>
+          <h2 class="artifact-hero-title">Analisis Modul Materi Informatika: Pemrograman Python Dasar</h2>
+          <p class="artifact-hero-desc">
+            Telaah kritis terhadap Modul Bacaan Mandiri murid yang terdiri atas 13 halaman dan mencakup 14 bagian materi (Bagian A–N). Mengkaji konsep dasar Python, konversi tipe data input(), struktur percabangan, simulasi elektronika kontekstual, representasi pseudocode, serta pengenalan aktivitas pengujian dan debugging.
+          </p>
+
+          <div class="artifact-specs-grid">
+            <div class="spec-item">
+              <span class="spec-label">Bentuk Artefak</span>
+              <span class="spec-val">Modul Bahan Ajar / Sumber Belajar Mandiri</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Mata Pelajaran & Fase</span>
+              <span class="spec-val">Informatika • Fase E (Kelas X)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Satuan Pendidikan</span>
+              <span class="spec-val">{studentProfile.school}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Konsentrasi Keahlian</span>
+              <span class="spec-val">Teknik Elektronika Industri</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Cakupan Materi</span>
+              <span class="spec-val">14 Bagian (Materi Bagian A sampai N)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Konteks Penerapan</span>
+              <span class="spec-val">Daya Listrik (P=V&times;I), Kipas Suhu, Tegangan Baterai</span>
+            </div>
+          </div>
+
+          <div class="artifact-hero-actions">
+            <a href={materiDriveUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Buka Modul Materi</span>
+            </a>
+            <a href={`${berandaHref}#artefak-pendukung`} class="btn btn--outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>Lihat di Beranda</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigasi Cepat (Quick Jump Modul Materi) -->
+      <nav class="quick-jump-nav" aria-label="Navigasi Cepat Aspek Modul Materi">
+        <span class="quick-jump-label">Pintasan Aspek Modul:</span>
+        <div class="quick-jump-pills">
+          <a href="#aspek-materi-1" class="jump-pill">1. Identitas Modul</a>
+          <a href="#aspek-materi-2" class="jump-pill">2. Cakupan Materi</a>
+          <a href="#aspek-materi-3" class="jump-pill">3. Sistematika</a>
+          <a href="#aspek-materi-4" class="jump-pill">4. Bahasa & Contoh</a>
+          <a href="#aspek-materi-5" class="jump-pill">5. Representasi Visual</a>
+          <a href="#aspek-materi-6" class="jump-pill">6. Penerapan & Latihan</a>
+          <a href="#aspek-materi-7" class="jump-pill">7. Belajar Mandiri</a>
+          <a href="#kesimpulan-umum-materi" class="jump-pill jump-pill--highlight">8. Kesimpulan Modul</a>
+        </div>
+      </nav>
+
+      <!-- Stack Pembahasan 8 Aspek Analisis Modul Materi -->
+      <div class="analysis-sections-stack">
+        
+        <!-- ASPEK MATERI 1 -->
+        <article class="card analysis-card" id="aspek-materi-1">
+          <div class="aspect-header">
+            <div class="aspect-number">01</div>
+            <div>
+              <span class="aspect-tag">Aspek Kelengkapan Sumber Belajar</span>
+              <h2 class="aspect-title">Komponen Identitas dan Kelengkapan Modul</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul Pemrograman Python Dasar disusun sebagai bahan ajar mata pelajaran Informatika untuk mendukung pembelajaran pemrograman pada murid kelas X SMK. Berdasarkan isi yang diberikan, modul terdiri atas 13 halaman dan memiliki bagian materi A sampai N, mulai dari pengenalan Python hingga rangkuman.
+            </p>
+            <p class="block-text">
+              Materi disusun untuk membantu murid memahami hubungan antara algoritma yang telah dipelajari sebelumnya dan implementasinya dalam bahasa pemrograman Python. Modul mencakup pengenalan Python, cara menjalankan program, penggunaan perintah dasar, variabel, tipe data, input, operator, percabangan, serta penerjemahan algoritma menjadi program.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Materi memiliki susunan bagian yang jelas, mulai dari pengenalan konsep hingga penerapan dan rangkuman.</li>
+              <li>Pembahasan diawali dengan menghubungkan materi sebelumnya, yaitu algoritma, pseudocode, dan flowchart, dengan pemrograman Python.</li>
+              <li>Materi menggunakan contoh yang sesuai dengan konteks murid SMK Teknik Elektronika.</li>
+              <li>Rangkuman pada bagian akhir membantu murid mengingat kembali konsep utama yang telah dipelajari.</li>
+              <li>Modul dapat digunakan secara fleksibel sebagai pendamping praktik pemrograman menggunakan komputer dan LKPD.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Identitas dan petunjuk penggunaan modul belum tampak lengkap:</strong> Bagian yang dianalisis langsung dimulai dengan judul Pemrograman Python Dasar dan materi A. Belum terlihat informasi mengenai identitas penyusun, sasaran kelas, tujuan penggunaan modul, serta petunjuk belajar secara keseluruhan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan halaman identitas yang memuat mata pelajaran, fase/kelas, materi, tujuan pembelajaran, alokasi waktu, dan petunjuk penggunaan modul.
+                </div>
+              </li>
+              <li>
+                <strong>Petunjuk penggunaan modul secara mandiri belum dijelaskan secara khusus:</strong> Modul memberikan penjelasan dan contoh, tetapi belum tampak panduan umum tentang urutan belajar, cara menggunakan contoh kode, atau langkah yang harus dilakukan ketika program menghasilkan kesalahan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan petunjuk belajar singkat, seperti membaca konsep, mengamati kode, mengetik ulang program, menjalankan program, mencatat hasil, dan memperbaiki kesalahan.
+                </div>
+              </li>
+              <li>
+                <strong>Hubungan antara modul dan LKPD perlu diperjelas:</strong> Modul menjadi sumber penjelasan konsep, sedangkan aktivitas praktik dan pengumpulan hasil kerja dilaksanakan melalui LKPD. Namun, petunjuk mengenai bagian modul yang harus dipelajari sebelum mengerjakan setiap praktik belum tampak secara eksplisit.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Mencantumkan rujukan bagian modul pada setiap kegiatan LKPD, misalnya bagian C–F untuk praktik input/output dan variabel, bagian G–H untuk perhitungan daya, serta bagian I–M untuk operator perbandingan dan percabangan.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Identitas dan Kelengkapan:</strong> Modul telah memiliki susunan materi yang terstruktur dan relevan sebagai bahan ajar Python Dasar. Penyempurnaan dapat difokuskan pada identitas, petunjuk belajar mandiri, serta hubungan antara materi dan aktivitas praktik.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 2 -->
+        <article class="card analysis-card" id="aspek-materi-2">
+          <div class="aspect-header">
+            <div class="aspect-number">02</div>
+            <div>
+              <span class="aspect-tag">Aspek Substansi Keilmuan</span>
+              <h2 class="aspect-title">Komponen Ketepatan dan Cakupan Materi</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul mencakup konsep dasar Python dan penerapannya untuk menyelesaikan masalah sederhana. Materi meliputi pengertian Python, cara menjalankan program, print(), variabel, tipe data str, int, float, dan boolean, penggunaan input(), konversi tipe data, operator aritmatika, operator perbandingan, percabangan if, if-else, dan if-elif-else.
+            </p>
+            <p class="block-text">
+              Selain itu, modul menghubungkan pemrograman dengan bidang Teknik Elektronika melalui contoh perhitungan daya listrik menggunakan rumus (P = V &times; I), sistem kipas otomatis berdasarkan suhu, serta pemeriksaan tegangan baterai. Materi juga menunjukkan bagaimana pseudocode diterjemahkan menjadi program Python.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Cakupan materi sangat sesuai untuk pengenalan pemrograman Python tingkat dasar di fase E SMK.</li>
+              <li>Konsep disajikan secara bertahap, dari perintah sederhana hingga struktur pengambilan keputusan logika.</li>
+              <li>Penjelasan mengenai input() dan konversi menggunakan int() atau float() mendukung pemahaman pengolahan masukan pengguna secara tepat.</li>
+              <li>Operator aritmatika dan perbandingan diperkenalkan melalui contoh yang dapat langsung diuji murid.</li>
+              <li>Contoh percabangan menggunakan suhu dan tegangan baterai membantu murid memahami penerapan logika program nyata.</li>
+              <li>Hubungan pseudocode dengan program Python memperkuat kesinambungan pembelajaran algoritma dan pemrograman.</li>
+              <li>Materi debugging disebutkan dalam rangkuman sehingga murid diperkenalkan pada pentingnya menguji dan memperbaiki program.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Pembahasan debugging belum menjadi bagian materi yang terstruktur:</strong> Pada bagian rangkuman, modul menyatakan bahwa program perlu diuji dan diperbaiki. Namun pada bagian materi A–M, belum tampak pembahasan khusus mengenai jenis kesalahan, cara membaca pesan error, atau prosedur memperbaiki program.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan subbagian debugging yang memuat contoh kesalahan sintaks, kesalahan indentasi, kesalahan konversi tipe data, dan kesalahan logika beserta solusi perbaikannya.
+                </div>
+              </li>
+              <li>
+                <strong>Materi tipe data masih dapat diperdalam melalui perbandingan penggunaan:</strong> Modul telah menjelaskan tipe data str, int, float, dan boolean, tetapi penjelasan yang diberikan masih bersifat pengenalan dasar.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan contoh perbandingan penggunaan tipe data, terutama perbedaan angka yang disimpan sebagai teks (string) dan angka yang dapat dikalkulasi secara numerik pasca-konversi input().
+                </div>
+              </li>
+              <li>
+                <strong>Hubungan operator perbandingan dengan nilai batas perlu diperkuat:</strong> Modul memberikan contoh suhu 30&deg;C dan 35&deg;C untuk menjelaskan kondisi percabangan. Contoh tersebut sudah relevan, tetapi murid juga perlu memahami perbedaan antara operator &gt; dan &gt;=, serta dampaknya terhadap output.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan tabel pengujian yang membandingkan hasil pada nilai di bawah batas, tepat pada batas, dan di atas batas (misal: 29&deg;C, 30&deg;C, dan 31&deg;C untuk kondisi suhu &gt;= 30).
+                </div>
+              </li>
+              <li>
+                <strong>Cakupan operator aritmatika belum seluruhnya dihubungkan dengan contoh kontekstual:</strong> Tabel operator sudah memuat penjumlahan, pengurangan, perkalian, pembagian, sisa pembagian (modulo), dan pangkat. Namun penerapannya secara khusus baru berfokus pada perkalian daya listrik.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memberikan contoh tambahan yang sesuai kebutuhan elektronika, seperti menghitung selisih tegangan, rata-rata pengukuran, atau konversi satuan elektronika.
+                </div>
+              </li>
+              <li>
+                <strong>Penerapan Python masih berupa simulasi berbasis input dan output:</strong> Contoh kipas otomatis dan pemeriksaan baterai membantu menjelaskan logika pemrograman, tetapi program tersebut belum membaca sensor fisik secara langsung.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menegaskan bahwa contoh tersebut merupakan simulasi logika kendali perangkat lunak, yang nantinya dapat diintegrasikan dengan mikrokontroler pada tingkat lanjut.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Cakupan Materi:</strong> Materi telah mencakup konsep utama Python Dasar dan relevan dengan kebutuhan murid Teknik Elektronika. Perbaikan utama diperlukan pada pembahasan debugging, pendalaman tipe data, pengujian nilai batas, serta penambahan contoh penerapan operator.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 3 -->
+        <article class="card analysis-card" id="aspek-materi-3">
+          <div class="aspect-header">
+            <div class="aspect-number">03</div>
+            <div>
+              <span class="aspect-tag">Aspek Alur Pedagogis</span>
+              <h2 class="aspect-title">Komponen Sistematika dan Urutan Penyajian</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul disusun dalam urutan materi yang bergerak dari pengenalan bahasa pemrograman menuju penerapan logika. Bagian A menjelaskan Python dan hubungannya dengan algoritma. Bagian B membahas cara menjalankan program, dilanjutkan dengan print(), variabel, tipe data, dan input() pada bagian C–F.
+            </p>
+            <p class="block-text">
+              Bagian G–H membahas operator aritmatika dan penerapannya pada perhitungan daya listrik. Bagian I–L membahas operator perbandingan dan percabangan. Bagian M memperlihatkan penerjemahan algoritma menjadi program melalui kasus pemeriksaan tegangan baterai, sedangkan bagian N berisi rangkuman komprehensif.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Urutan materi bergerak sangat logis dari konsep dasar sintaksis menuju penerapan struktur kontrol yang lebih kompleks.</li>
+              <li>Pembahasan input, variabel, dan tipe data disajikan tepat sebelum materi operator dan struktur percabangan.</li>
+              <li>Contoh perhitungan daya listrik menjadi jembatan konkret antara konsep operator aritmatika dan konteks Teknik Elektronika.</li>
+              <li>Percabangan diperkenalkan secara bertahap: mulai dari if tunggal, if-else dua kondisi, kemudian if-elif-else banyak kondisi.</li>
+              <li>Bagian M memberikan contoh penerapan terpadu yang menggabungkan input, operator perbandingan, dan percabangan secara utuh.</li>
+              <li>Rangkuman di bagian akhir membantu mengonsolidasikan konsep-konsep kunci yang telah dipelajari.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Peralihan dari contoh ke latihan belum tampak konsisten:</strong> Struktur materi telah memberikan penjelasan dan contoh, tetapi pada teks modul belum semua bagian menunjukkan latihan singkat setelah konsep diperkenalkan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan satu atau dua latihan mandiri di setiap akhir bagian penting (misal: latihan variabel komponen, latihan kalkulasi daya listrik).
+                </div>
+              </li>
+              <li>
+                <strong>Pseudocode belum selalu diperlihatkan secara lengkap bersama kode Python:</strong> Bagian A dan M menunjukkan hubungan algoritma dan program, sedangkan bagian K memberikan pseudocode sistem kipas. Namun belum seluruh konsep disajikan konsisten dengan alur: masalah &rarr; pseudocode &rarr; kode Python &rarr; pengujian.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menggunakan pola penyajian yang konsisten untuk setiap contoh utama: deskripsi masalah, input/output, pseudocode, kode Python, hasil terminal, dan tabel uji.
+                </div>
+              </li>
+              <li>
+                <strong>Bagian debugging belum memiliki posisi yang jelas dalam alur materi:</strong> Modul menekankan pengujian dan perbaikan program pada rangkuman, tetapi belum terlihat pembahasan khusus sebelum rangkuman.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menempatkan materi debugging tepat setelah bagian percabangan atau setelah bagian M agar murid langsung menerapkannya pada program yang utuh.
+                </div>
+              </li>
+              <li>
+                <strong>Rangkuman belum disertai peta hubungan antarkonsep:</strong> Sepuluh butir rangkuman telah membantu mengingat definisi dan sintaks, namun keterkaitan alur komputasi belum disajikan secara grafis.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan diagram alur konsep (input() &rarr; variabel & tipe data &rarr; operasi/kondisi &rarr; print() &rarr; testing & debugging).
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Sistematika:</strong> Urutan materi telah logis dan bertahap, dari pengenalan Python hingga penerapan percabangan. Penyempurnaan diperlukan pada latihan di setiap bagian, konsistensi alur pemecahan masalah, penempatan debugging, dan peta hubungan antarkonsep.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 4 -->
+        <article class="card analysis-card" id="aspek-materi-4">
+          <div class="aspect-header">
+            <div class="aspect-number">04</div>
+            <div>
+              <span class="aspect-tag">Aspek Keterbacaan & Konteks</span>
+              <h2 class="aspect-title">Komponen Bahasa, Contoh, dan Kontekstualitas</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Bahasa yang digunakan dalam modul relatif sederhana dan ramah bagi pemula. Istilah seperti variabel, tipe data, operator, input, output, dan percabangan diperkenalkan dengan definisi yang lugas disertai contoh penggunaan praktis.
+            </p>
+            <p class="block-text">
+              Modul juga menggunakan konteks yang dekat dengan konsentrasi keahlian murid, terutama perhitungan daya listrik, sistem kipas otomatis, dan pemeriksaan tegangan baterai. Contoh tersebut membantu murid melihat bahwa pemrograman dapat digunakan untuk menyelesaikan masalah yang berkaitan dengan bidang keahliannya.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Penjelasan konsep menggunakan bahasa yang relatif mudah dipahami oleh pemula tanpa jargon rumit.</li>
+              <li>Istilah teknis diperkenalkan bersama fungsi dan contoh penggunaannya dalam kode program.</li>
+              <li>Penamaan variabel memiliki makna kontekstual yang jelas (seperti tegangan, arus, daya, dan suhu).</li>
+              <li>Konteks Teknik Elektronika memberikan relevansi yang tinggi terhadap pembelajaran Informatika di SMK.</li>
+              <li>Kasus kipas otomatis dan pemeriksaan baterai memberikan kesempatan memahami keputusan program berdasarkan kondisi.</li>
+              <li>Contoh pseudocode membantu menghubungkan istilah pemrograman dengan pengetahuan algoritma yang telah dipelajari sebelumnya.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Contoh kode perlu dipastikan tampil secara utuh dan terbaca:</strong> Beberapa bagian teks modul hasil konversi dokumen menunjukkan cuplikan kode yang terpotong setelah label “Contoh:”. Format pada berkas asli perlu dipastikan utuh.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memastikan setiap blok kode tercantum lengkap dengan format monospace yang mudah dibedakan dari narasi, serta dilengkapi cuplikan output terminal yang sesuai.
+                </div>
+              </li>
+              <li>
+                <strong>Beberapa istilah teknis dapat diperjelas dengan contoh visual:</strong> Istilah seperti interpreter, ekstensi file .py, dan indentasi blok kode memerlukan penjelasan konkret tentang dampaknya dalam praktik.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyertakan visualisasi file .py vs terminal hasil, fungsi interpreter saat eksekusi, serta contoh indentasi benar versus IndentationError.
+                </div>
+              </li>
+              <li>
+                <strong>Konteks contoh perlu dijaga agar tetap akurat secara teknis:</strong> Perhitungan daya (P = V &times; I) sudah tepat, namun sistem kendali kipas dan baterai masih mengandalkan input keyboard manual.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Memberikan keterangan bahwa kode mengolah masukan pengguna sebagai simulasi data sensor, bukan pengukuran otomatis oleh perangkat keras.
+                </div>
+              </li>
+              <li>
+                <strong>Variasi contoh praktik kejuruan masih dapat diperluas:</strong> Contoh dapat diperkaya untuk mengakomodasi berbagai skenario kerja elektronika.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan contoh pencatatan nilai resistor, penghitungan resistansi total seri/paralel, atau verifikasi toleransi komponen elektronika.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Bahasa dan Kontekstualitas:</strong> Bahasa dan konteks materi sudah sesuai untuk murid kelas X Teknik Elektronika. Perbaikan dapat dilakukan dengan memastikan keutuhan kode, memperjelas istilah teknis, dan memberikan variasi contoh yang relevan dengan praktik kejuruan.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 5 -->
+        <article class="card analysis-card" id="aspek-materi-5">
+          <div class="aspect-header">
+            <div class="aspect-number">05</div>
+            <div>
+              <span class="aspect-tag">Aspek Representasi Visual</span>
+              <h2 class="aspect-title">Komponen Visual dan Representasi Program</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul menggunakan beberapa bentuk representasi, yaitu penjelasan tertulis, pseudocode, kode program Python, tabel tipe data, tabel operator, serta contoh hasil eksekusi program di terminal. Pada bagian A, hubungan masalah, algoritma, pseudocode/flowchart, program, dan hasil ditampilkan melalui alur sederhana.
+            </p>
+            <p class="block-text">
+              Representasi tersebut membantu murid memahami bahwa program Python merupakan implementasi dari algoritma yang dirancang untuk menyelesaikan masalah secara logis.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Tabel tipe data membantu membandingkan jenis data (str, int, float, bool), keterangan, dan contoh nilai.</li>
+              <li>Tabel operator aritmatika dan perbandingan memudahkan murid mengidentifikasi simbol serta fungsinya secara cepat.</li>
+              <li>Pseudocode memberikan jembatan kognitif yang kokoh antara rancangan algoritma dan kode program Python.</li>
+              <li>Hasil eksekusi yang dicontohkan membantu murid memverifikasi ketepatan sintaks dengan output yang diharapkan.</li>
+              <li>Alur tahapan dari masalah hingga hasil memperlihatkan proses komputasi penyelesaian masalah secara menyeluruh.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Representasi visual hubungan antara algoritma dan program masih sederhana:</strong> Alur masalah &rarr; algoritma &rarr; pseudocode/flowchart &rarr; program &rarr; hasil telah dicantumkan, tetapi belum terlihat contoh diagram utuh yang berdampingan dengan kode program.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan representasi visual komparatif: diagram alur (flowchart) di sisi kiri, pseudocode di tengah, dan kode program Python di sisi kanan.
+                </div>
+              </li>
+              <li>
+                <strong>Visualisasi alur percabangan dapat diperkuat dengan flowchart:</strong> Bagian percabangan menjelaskan kondisi secara teks dan pseudocode, namun belum dilengkapi diagram flowchart yang menggambarkan percabangan Ya/Tidak untuk if-else dan if-elif-else.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyajikan flowchart standar (simbol belah ketupat keputusan) pada kasus kipas suhu dan baterai agar alur logika terlihat nyata.
+                </div>
+              </li>
+              <li>
+                <strong>Tampilan kode perlu dibedakan secara konsisten dari teks penjelasan:</strong> Kode program Python akan jauh lebih mudah dipahami jika diformat dalam box monospace tersendiri dengan penyorotan sintaks (syntax highlighting).
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menggunakan blok kode monospace berwarna abu-abu gelap/terang, menjaga indentasi 4 spasi secara rapi, dan memisahkan bagian input terminal dengan output hasil.
+                </div>
+              </li>
+              <li>
+                <strong>Contoh visual kesalahan dan perbaikannya belum tampak:</strong> Modul menyebutkan pentingnya debugging, tetapi belum menyajikan komparasi visual kode salah versus kode benar.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan kotak 'Peringatan Error' yang membandingkan kode yang memicu SyntaxError/TypeError dan perbaikan yang benar.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Visual dan Representasi:</strong> Modul telah menggunakan tabel, pseudocode, kode, dan output sebagai bentuk representasi yang mendukung pembelajaran. Pengembangan lebih lanjut dapat dilakukan melalui flowchart, konsistensi format kode, dan contoh visual debugging.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 6 -->
+        <article class="card analysis-card" id="aspek-materi-6">
+          <div class="aspect-header">
+            <div class="aspect-number">06</div>
+            <div>
+              <span class="aspect-tag">Aspek Keterampilan Praktik</span>
+              <h2 class="aspect-title">Komponen Penerapan, Pengujian, dan Latihan</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul menyajikan contoh penerapan Python dalam masalah yang relevan dengan Teknik Elektronika. Bagian H membahas program perhitungan daya listrik berdasarkan tegangan dan arus, bagian K–L menjelaskan sistem kipas otomatis berdasarkan suhu, dan bagian M memberikan kasus pemeriksaan tegangan baterai.
+            </p>
+            <p class="block-text">
+              Contoh-contoh tersebut memperlihatkan penggunaan input, variabel, operator, dan percabangan dalam menyelesaikan masalah sederhana. Modul juga menekankan pada bagian rangkuman bahwa program perlu diuji dan diperbaiki untuk memastikan hasilnya sesuai dengan algoritma.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Contoh penerapan menggunakan permasalahan nyata yang relevan dengan konsentrasi keahlian murid.</li>
+              <li>Program perhitungan daya listrik menggabungkan input, konversi tipe data, operasi perkalian aritmatika, dan penulisan output berformat.</li>
+              <li>Kasus kipas otomatis memperlihatkan penerapan operator perbandingan dan struktur percabangan secara aplikatif.</li>
+              <li>Kasus pemeriksaan tegangan baterai menggabungkan beberapa ambang batas kondisi dalam satu program terstruktur.</li>
+              <li>Materi mendukung latihan penerjemahan pseudocode menjadi kode program Python yang dapat dieksekusi langsung.</li>
+              <li>Pengujian program dapat dicoba langsung melalui editor Python sehingga murid mengamati hubungan input &rarr; proses &rarr; output.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Latihan mandiri belum tampak merata pada seluruh bagian materi:</strong> Modul telah menyajikan beberapa contoh program, tetapi belum terlihat latihan mandiri yang konsisten setelah setiap pengenalan konsep.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan latihan bergradasi singkat: membuat program salam identitas setelah materi input/output, menghitung daya setelah materi operator, dan memeriksa status tegangan setelah materi percabangan.
+                </div>
+              </li>
+              <li>
+                <strong>Pengujian program belum dibahas sebagai prosedur yang sistematis:</strong> Modul memberikan contoh hasil eksekusi dan beberapa nilai input, tetapi belum tampak panduan umum mengenai cara memilih data uji, mencatat hasil aktual, dan membandingkannya dengan hasil yang diharapkan.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan tabel pengujian baku yang memuat kolom: Nilai Input, Hasil yang Diharapkan, Hasil Aktual Terminal, Status Kesesuaian (Sesuai/Belum), dan Catatan Perbaikan.
+                </div>
+              </li>
+              <li>
+                <strong>Latihan debugging perlu diperkuat:</strong> Rangkuman menyebutkan pentingnya memperbaiki program, tetapi belum tampak aktivitas yang secara khusus melatih murid menemukan dan memperbaiki bug kode.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan rubrik 'Tantangan Perbaikan Bug' berisi kode yang sengaja salah (misal: kurang tanda titik dua, operator &gt; alih-alih &gt;=, atau variabel belum dikonversi float) untuk diperbaiki murid.
+                </div>
+              </li>
+              <li>
+                <strong>Tantangan pengembangan belum tampak secara eksplisit pada modul:</strong> Belum terlihat pembagian latihan berdasarkan tingkat kesiapan murid (scaffolding vs enrichment).
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan latihan berjenjang: Dasar (melengkapi kode), Menengah (modifikasi kondisi batas), dan Mahir (membuat program baru dengan percabangan 3 kondisi atau lebih).
+                </div>
+              </li>
+              <li>
+                <strong>Hubungan materi dengan hasil praktik perlu diperjelas:</strong> Rujukan silang antara materi penjelasan modul dengan instrumen penugasan LKPD belum terhubung secara eksplisit.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan ikon atau penanda 'Ayo Praktik di LKPD' pada modul agar alur belajar murid di lab komputer menjadi terarah.
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Penerapan dan Latihan:</strong> Contoh penerapan telah relevan dan mendukung pemahaman konsep Python Dasar. Pengembangan yang diperlukan adalah menambah latihan mandiri, prosedur pengujian sistematis, aktivitas debugging, serta latihan bertingkat untuk mengakomodasi perbedaan kemampuan murid.
+          </div>
+        </article>
+
+        <!-- ASPEK MATERI 7 -->
+        <article class="card analysis-card" id="aspek-materi-7">
+          <div class="aspect-header">
+            <div class="aspect-number">07</div>
+            <div>
+              <span class="aspect-tag">Aspek Self-Regulated Learning</span>
+              <h2 class="aspect-title">Komponen Evaluasi dan Dukungan Belajar Mandiri</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Modul memiliki bagian rangkuman yang memuat sepuluh poin utama, mulai dari fungsi Python, print(), variabel, tipe data, input(), operator aritmatika, operator perbandingan, percabangan, penerjemahan algoritma, hingga pentingnya pengujian dan perbaikan program.
+            </p>
+            <p class="block-text">
+              Rangkuman tersebut dapat digunakan sebagai bahan pengulangan setelah murid menyelesaikan pembelajaran. Modul juga dapat dipadukan dengan asesmen dan latihan pada LKPD untuk mengetahui pemahaman serta keterampilan praktik murid.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Rangkuman memuat sepuluh konsep inti yang disajikan secara ringkas dan mudah diingat.</li>
+              <li>Urutan rangkuman mengikuti alur perkembangan materi secara konsisten dari sintaks dasar hingga perbaikan kode.</li>
+              <li>Modul menyediakan contoh kode yang dapat diketik dan dijalankan kembali secara mandiri di rumah atau lab.</li>
+              <li>Materi berfungsi efektif sebagai rujukan belajar ulang (self-study) sebelum pelaksanaan asesmen.</li>
+              <li>Rangkuman secara tegas menanamkan pola pikir bahwa program harus selalu diuji dan diperbaiki, bukan sekadar selesai ditulis.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Instrumen evaluasi mandiri belum tampak pada modul:</strong> Bagian N berisi rangkuman naratif, tetapi belum menyediakan soal refleksi diri, kuis mandiri, atau checklist pemahaman yang dapat diisi murid secara mandiri.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan 5 soal kuis diagnostik mandiri (misal: tebak output kode percabangan, identifikasi tipe data) beserta kunci jawaban di lampiran.
+                </div>
+              </li>
+              <li>
+                <strong>Panduan belajar ketika mengalami kendala error belum tampak:</strong> Murid pemula rentan mengalami kebingungan saat menghadapi pesan error seperti ValueError atau IndentationError saat praktik tanpa guru.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan halaman suplemen 'Pusat Bantuan Error' yang merangkum 5 pesan error paling umum dan langkah solusinya.
+                </div>
+              </li>
+              <li>
+                <strong>Kriteria keberhasilan belajar belum dirumuskan dalam checklist kemampuan:</strong> Rangkuman menjelaskan apa yang dipelajari, namun belum merumuskan apa yang semestinya mampu dilakukan murid (kemampuan operasional).
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan tabel 'Checklist Keterampilan Diri' (Saya bisa membuat input/output, saya bisa mengonversi float, saya bisa menulis percabangan).
+                </div>
+              </li>
+              <li>
+                <strong>Dukungan bagi murid dengan kecepatan belajar berbeda belum tersedia:</strong> Belum tampak materi bantuan bertahap (scaffolding) untuk murid yang tertinggal maupun pengayaan bagi murid yang cepat paham.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menyediakan suplemen kode rumpang terpandu dan tantangan studi kasus bonus untuk diferensiasi belajar mandiri.
+                </div>
+              </li>
+              <li>
+                <strong>Hubungan rangkuman dengan tindak lanjut belajar belum dijelaskan:</strong> Belum terlihat panduan mengenai materi apa yang perlu dipelajari berikutnya setelah murid menguasai isi modul ini.
+                <div class="rec-note">
+                  <strong>Rekomendasi:</strong> Menambahkan refleksi akhir dan rekomendasi materi lanjutan (seperti struktur perulangan loop dan tipe data koleksi list).
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek Evaluasi dan Belajar Mandiri:</strong> Rangkuman modul sudah membantu murid mengingat konsep utama. Agar lebih mendukung belajar mandiri, modul perlu dilengkapi evaluasi diri, daftar kesalahan umum, kriteria keberhasilan, serta latihan remedial dan pengayaan.
+          </div>
+        </article>
+
+        <!-- KESIMPULAN UMUM MODUL MATERI -->
+        <article class="card analysis-card analysis-card--conclusion" id="kesimpulan-umum-materi">
+          <div class="aspect-header">
+            <div class="aspect-number aspect-number--primary">08</div>
+            <div>
+              <span class="aspect-tag">Sintesis Komprehensif Bahan Ajar</span>
+              <h2 class="aspect-title">Kesimpulan Umum & Rekomendasi Modul Materi</h2>
+            </div>
+          </div>
+
+          <div class="conclusion-content">
+            <p class="block-text">
+              Berdasarkan hasil analisis, Modul Pemrograman Python Dasar telah memiliki cakupan materi yang relevan untuk pembelajaran Informatika kelas X SMK, khususnya pada Konsentrasi Keahlian Teknik Elektronika Industri. Materi disusun secara bertahap, dimulai dari pengenalan Python dan cara menjalankan program, kemudian dilanjutkan dengan print(), variabel, tipe data, input, operator aritmatika, operator perbandingan, dan percabangan. Pada bagian akhir, modul menghubungkan konsep-konsep tersebut dengan penerjemahan pseudocode menjadi program melalui kasus pemeriksaan tegangan baterai.
+            </p>
+            <p class="block-text">
+              Kekuatan utama modul terletak pada hubungan antara konsep pemrograman dan konteks kejuruan. Contoh perhitungan daya listrik, sistem kipas otomatis, dan pemeriksaan tegangan baterai membantu murid memahami bahwa Python dapat digunakan untuk menyelesaikan masalah sederhana yang berkaitan dengan bidang Teknik Elektronika. Penyajian pseudocode dan kode Python juga mendukung kesinambungan pembelajaran dari algoritma menuju implementasi program.
+            </p>
+            <p class="block-text">
+              Meskipun demikian, modul masih dapat dikembangkan agar tidak hanya berfungsi sebagai sumber penjelasan konsep, tetapi juga sebagai panduan praktik dan belajar mandiri. Beberapa hal yang perlu diperhatikan adalah penambahan latihan pada setiap bagian, pembahasan debugging yang lebih sistematis, penyajian flowchart untuk contoh percabangan, serta instrumen evaluasi diri dan daftar kesalahan umum. Selain itu, hubungan antara materi modul dan kegiatan pada LKPD perlu diperjelas agar murid dapat mengikuti proses belajar secara terarah.
+            </p>
+            <p class="block-text">
+              Dengan perbaikan tersebut, modul akan lebih mendukung pembelajaran berbasis masalah (<em>Problem-Based Learning</em> atau PBL). Murid tidak hanya membaca dan meniru contoh program, tetapi juga berlatih memahami masalah, menentukan input dan output, menyusun algoritma, menulis kode Python, menguji hasil, serta memperbaiki kesalahan. Dengan demikian, modul dapat menjadi sumber belajar yang lebih efektif untuk mengembangkan pemahaman konsep, keterampilan pemrograman dasar, dan kemampuan pemecahan masalah yang relevan dengan bidang keahlian murid.
+            </p>
+
+            <div class="synthesis-takeaways">
+              <h3 class="takeaways-title">Intisari Rekomendasi Perbaikan Utama Modul Materi:</h3>
+              <div class="takeaways-grid">
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Petunjuk Belajar & Rujukan LKPD</span>
+                  <p>Menyertakan panduan belajar mandiri komprehensif dan mencantumkan rujukan silang antara bab modul materi dengan lembar penugasan LKPD.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Subbagian Khusus Debugging</span>
+                  <p>Membahas jenis-jenis pesan kesalahan umum (SyntaxError, TypeError, IndentationError) dan teknik sistematis pembacaan error trace.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Flowchart Percabangan & Nilai Batas</span>
+                  <p>Melengkapi contoh kondisi if-elif-else dengan flowchart grafis dan tabel uji nilai batas (boundary testing) pada kasus suhu dan tegangan.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Latihan Bertingkat & Evaluasi Diri</span>
+                  <p>Menyediakan latihan terstruktur bergradasi (kode rumpang &rarr; mandiri), lembar cek pemahaman diri, dan tantangan pengayaan kejuruan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Kartu Transisi ke Analisis LKPD / RPP -->
+      <div class="next-artifact-card">
+        <div class="next-artifact-info">
+          <span class="badge badge--primary">Artefak Selanjutnya</span>
+          <h3 class="next-artifact-title">Analisis LKPD: Pemrograman Python Dasar</h3>
+          <p class="next-artifact-desc">Lanjutkan membaca evaluasi kritis lembar aktivitas praktik murid yang memuat 4 kegiatan praktik terstruktur di laboratorium komputer.</p>
+        </div>
+        <div class="next-artifact-actions">
+          <button type="button" class="btn btn--primary switch-to-lkpd-btn">
+            <span>Buka Analisis LKPD (Artefak 03)</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="btn btn--outline switch-to-rpp-btn">
+            <span>Kembali ke Analisis RPP (Artefak 01)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- PANEL 3: ANALISIS LKPD (ARTEFAK 03)        -->
+    <!-- ========================================== -->
+    <div id="panel-lkpd" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-lkpd">
+      <div id="art-uas-02" class="tab-anchor"></div>
+      <div id="analisis-lkpd" class="tab-anchor"></div>
+
+      <!-- Kartu Banner Identitas Artefak LKPD -->
+      <section class="card artifact-hero-card" id="identitas-lkpd">
+        <div class="artifact-hero-content">
+          <div class="artifact-hero-meta-top">
+            <span class="artifact-code">Artefak 03</span>
+            <span class="badge">Lembar Aktivitas Murid</span>
+          </div>
+          <h2 class="artifact-hero-title">Analisis LKPD Informatika: Pemrograman Python Dasar</h2>
+          <p class="artifact-hero-desc">
+            Evaluasi mendalam terhadap Lembar Kerja Peserta Didik (LKPD) yang memuat empat aktivitas praktik bergradasi: input-output identitas, kalkulasi daya listrik (P = V &times; I), logika percabangan kendali suhu kipas otomatis, serta tantangan terbuka kontekstual Teknik Elektronika.
+          </p>
+
+          <div class="artifact-specs-grid">
+            <div class="spec-item">
+              <span class="spec-label">Bentuk Artefak</span>
+              <span class="spec-val">Lembar Kerja Peserta Didik (LKPD) Praktik</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Sasaran Belajar</span>
+              <span class="spec-val">Murid Kelas X Fase E (Laboratorium Komputer)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Satuan Pendidikan</span>
+              <span class="spec-val">{studentProfile.school}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Konsentrasi Keahlian</span>
+              <span class="spec-val">Teknik Elektronika Industri</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Jumlah Praktik</span>
+              <span class="spec-val">4 Praktik (praktikDasar1.py – praktikDasar4.py)</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Luaran Penilaian</span>
+              <span class="spec-val">File Kode .py, Tabel Pengujian, Bukti Eksekusi</span>
+            </div>
+          </div>
+
+          <div class="artifact-hero-actions">
+            <a href={lkpdDriveUrl} target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Buka File LKPD</span>
+            </a>
+            <a href={`${berandaHref}#artefak-pendukung`} class="btn btn--outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>Lihat di Beranda</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigasi Cepat (Quick Jump LKPD) -->
+      <nav class="quick-jump-nav" aria-label="Navigasi Cepat Aspek LKPD">
+        <span class="quick-jump-label">Pintasan Aspek LKPD:</span>
+        <div class="quick-jump-pills">
+          <a href="#aspek-lkpd-1" class="jump-pill">1. Identitas Administrasi</a>
+          <a href="#aspek-lkpd-2" class="jump-pill">2. Tujuan Pembelajaran</a>
+          <a href="#aspek-lkpd-3" class="jump-pill">3. Tugas Praktik</a>
+          <a href="#aspek-lkpd-4" class="jump-pill">4. Urutan Kegiatan</a>
+          <a href="#aspek-lkpd-5" class="jump-pill">5. Bahasa & Instruksi</a>
+          <a href="#aspek-lkpd-6" class="jump-pill">6. Pengujian & Asesmen</a>
+          <a href="#aspek-lkpd-7" class="jump-pill">7. Kontekstualitas</a>
+          <a href="#kesimpulan-umum-lkpd" class="jump-pill jump-pill--highlight">8. Kesimpulan LKPD</a>
+        </div>
+      </nav>
+
+      <!-- Stack Pembahasan 8 Aspek Analisis LKPD -->
+      <div class="analysis-sections-stack">
+        
+        <!-- ASPEK LKPD 1 -->
+        <article class="card analysis-card" id="aspek-lkpd-1">
+          <div class="aspect-header">
+            <div class="aspect-number">01</div>
+            <div>
+              <span class="aspect-tag">Aspek Administrasi Panduan Kerja</span>
+              <h2 class="aspect-title">Komponen Identitas dan Kelengkapan Administrasi</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              LKPD telah memuat komponen identitas dasar berupa mata pelajaran, kelas/semester, materi, nama siswa, dan nomor absen. Selain itu, terdapat tujuan pembelajaran, alat dan bahan, petunjuk pengerjaan, tugas praktik, pengujian program, serta hasil pekerjaan yang harus dikumpulkan. Komponen tersebut menunjukkan bahwa LKPD telah dirancang sebagai panduan kegiatan praktik pemrograman yang menghasilkan produk berupa file program Python.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Identitas siswa disediakan dengan jelas sehingga hasil pekerjaan dapat diidentifikasi secara akurat.</li>
+              <li>Alat dan bahan yang dibutuhkan telah disebutkan, yaitu komputer/laptop, aplikasi atau editor Python, modul materi, dan LKPD.</li>
+              <li>Standarisasi nama file untuk setiap praktik telah ditentukan secara konsisten, mulai dari praktikDasar1.py sampai praktikDasar4.py.</li>
+              <li>Bagian hasil pekerjaan menjelaskan dokumen dan bukti praktik yang perlu dikumpulkan secara transparan.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Isian kelas dan semester masih kosong:</strong> Pada lembar dokumen awal, format isian kelas dan semester belum terisi secara lengkap. Sebaiknya diisi permanen (Kelas X / Semester Genap) sebelum digandakan untuk murid.
+              </li>
+              <li>
+                <strong>Belum terdapat informasi mengenai alokasi waktu dan petunjuk teknis:</strong> Belum terdapat keterangan alokasi waktu pengerjaan per praktik, identitas penyusun, atau prosedur teknis pengumpulan folder tugas.
+              </li>
+              <li>
+                <strong>Petunjuk pengerjaan mandiri vs diskusi kelompok perlu ditegaskan:</strong> Petunjuk menyebutkan kegiatan mandiri namun memperbolehkan diskusi. Perlu ditegaskan bahwa penulisan kode dan file program wajib dibuat mandiri, sedangkan diskusi difokuskan pada pemahaman logika algoritma.
+              </li>
+            </ol>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Komponen administrasi LKPD sudah cukup lengkap untuk mendukung kegiatan praktik, tetapi beberapa informasi perlu dilengkapi dan petunjuk pelaksanaan perlu diperjelas agar tidak menimbulkan perbedaan pemahaman.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 2 -->
+        <article class="card analysis-card" id="aspek-lkpd-2">
+          <div class="aspect-header">
+            <div class="aspect-number">02</div>
+            <div>
+              <span class="aspect-tag">Aspek Kejelasan Capaian Belajar</span>
+              <h2 class="aspect-title">Komponen Perumusan Tujuan Pembelajaran</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              LKPD mencantumkan tujuh tujuan pembelajaran yang mencakup penggunaan sintaks dasar Python, operator aritmatika dan perbandingan, percabangan, penulisan pseudocode, penerjemahan pseudocode menjadi program, serta pengujian dan perbaikan kesalahan. Tujuan tersebut relevan dengan kegiatan pada Praktik 1 sampai Praktik 4.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Tujuan pembelajaran menggunakan kata kerja operasional yang berorientasi aktivitas (menggunakan, menerapkan, menuliskan, menerjemahkan, menguji, dan memperbaiki).</li>
+              <li>Tujuan mencakup pengetahuan dan keterampilan pemrograman terapan, bukan sekadar teori hafalan sintaks.</li>
+              <li>Tujuan menerjemahkan pseudocode menjadi program terlihat nyata pada Praktik 2, Praktik 3, dan Praktik 4.</li>
+              <li>Tujuan pengujian dan perbaikan program didukung oleh tabel pengujian terstruktur serta instruksi perbaikan kesalahan kode.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Tujuan pembelajaran belum menyebutkan kriteria keberhasilan yang spesifik:</strong> Belum dicantumkan batas keberhasilan yang terukur, misalnya program dapat dijalankan tanpa error dan menghasilkan output sesuai kasus uji.
+              </li>
+              <li>
+                <strong>Tujuan penggunaan tipe data belum tampak eksplisit di Praktik 1:</strong> Tujuan pertama mencakup print(), variabel, tipe data, dan input(), tetapi Praktik 1 lebih menekankan input dan output teks tanpa penegasan tipe data numerik.
+              </li>
+              <li>
+                <strong>Pemetaan tujuan ke masing-masing praktik perlu dipertegas:</strong> Praktik 2 menekankan operator aritmatika, sedangkan Praktik 3 menekankan operator perbandingan dan percabangan.
+              </li>
+              <li>
+                <strong>Tujuan memperbaiki kesalahan program belum memiliki kolom dokumentasi khusus:</strong> Belum terdapat bagian khusus yang meminta murid mencatat jenis error yang ditemui dan bagaimana cara memperbaikinya.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi Perbaikan Tujuan:</strong> Tujuan pembelajaran dapat disempurnakan menjadi: <em>"Murid mampu membuat dan menjalankan program Python sederhana sesuai permasalahan, menggunakan sintaks dan operator yang relevan, serta menguji program menggunakan beberapa data input dan memperbaiki kesalahan yang ditemukan."</em>
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Tujuan pembelajaran sudah relevan dengan materi dan tugas praktik. Namun, pemetaan tujuan terhadap aktivitas serta indikator keberhasilan perlu dibuat lebih eksplisit agar pencapaian setiap tujuan dapat dinilai secara objektif.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 3 -->
+        <article class="card analysis-card" id="aspek-lkpd-3">
+          <div class="aspect-header">
+            <div class="aspect-number">03</div>
+            <div>
+              <span class="aspect-tag">Aspek Kesesuaian Aktivitas</span>
+              <h2 class="aspect-title">Komponen Materi dan Kesesuaian Tugas Praktik</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              LKPD terdiri atas empat praktik dengan tingkat kompleksitas yang meningkat secara bertahap. Praktik 1 meminta murid membuat program input-output identitas. Praktik 2 mengarahkan murid menghitung daya listrik menggunakan rumus (P = V &times; I). Praktik 3 menerapkan percabangan untuk menentukan kondisi kipas berdasarkan suhu. Praktik 4 memberikan tantangan terbuka yang berkaitan dengan Teknik Elektronika.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Praktik disusun secara bertahap dari pemahaman sintaks dasar hingga pemecahan masalah kontekstual yang lebih terbuka.</li>
+              <li>Praktik 1 memberikan sarana efektif berlatih menerima masukan melalui input() dan menyajikan informasi menggunakan print().</li>
+              <li>Praktik 2 menghubungkan pemrograman dengan konsep kelistrikan dasar (rumus daya) yang sangat relevan dengan kejuruan.</li>
+              <li>Praktik 3 memperkenalkan penerapan logika kondisi melalui kasus kipas otomatis dengan batasan yang jelas.</li>
+              <li>Praktik 4 memberi ruang otonomi kepada murid untuk memilih permasalahan, menumbuhkan kreativitas dan nalar kritis.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Praktik 2 belum menyediakan petunjuk konversi numerik:</strong> Pseudocode disediakan tetapi belum ada peringatan eksplisit bahwa input() menghasilkan string sehingga perlu konversi float() agar perhitungan daya tidak menghasilkan error.
+              </li>
+              <li>
+                <strong>Praktik 3 memerlukan panduan kerangka percabangan bagi pemula:</strong> Tugas menyusun pseudocode dan kode Python percabangan tanpa scaffolding sintaks if-else dapat membingungkan murid pemula.
+              </li>
+              <li>
+                <strong>Praktik 4 memerlukan panduan pemenuhan tiga komponen wajib:</strong> Murid diminta menggunakan operator aritmatika, perbandingan, dan percabangan, tetapi belum semua pilihan masalah secara alami membutuhkan ketiganya.
+              </li>
+              <li>
+                <strong>Ketentuan Praktik 4 belum menetapkan batasan luaran minimal:</strong> Belum ada ketentuan jumlah kondisi minimal atau jenis input yang harus dipenuhi dalam tantangan terbuka.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi:</strong> Tambahkan daftar periksa sebelum program dibuat, berisi input yang dibutuhkan, variabel yang digunakan, proses perhitungan, kondisi yang diperiksa, dan keluaran yang diharapkan. Pada Praktik 4, murid diminta menjelaskan bagaimana setiap unsur wajib digunakan dalam programnya.
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Materi dan tugas praktik telah relevan dengan pembelajaran Python dasar serta konteks Teknik Elektronika. Tantangan terbuka pada Praktik 4 menjadi kekuatan utama, tetapi perlu disertai kriteria yang jelas agar program yang dihasilkan tetap sesuai dengan tujuan pembelajaran.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 4 -->
+        <article class="card analysis-card" id="aspek-lkpd-4">
+          <div class="aspect-header">
+            <div class="aspect-number">04</div>
+            <div>
+              <span class="aspect-tag">Aspek Alur Komputasi</span>
+              <h2 class="aspect-title">Komponen Sistematika dan Urutan Kegiatan</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Urutan kegiatan bergerak dari program input-output, perhitungan aritmatika, penerapan percabangan, hingga proyek sederhana berbasis permasalahan. Pada beberapa praktik, murid diminta merancang solusi menggunakan pseudocode sebelum menerjemahkannya menjadi kode Python. Alur ini mendukung proses berpikir komputasional secara bertahap.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Urutan empat aktivitas praktik menunjukkan peningkatan kompleksitas tugas yang sangat proporsional.</li>
+              <li>Murid tidak langsung dipaksa coding, melainkan merancang solusi logika menggunakan pseudocode terlebih dahulu pada Praktik 2, 3, dan 4.</li>
+              <li>Praktik 3 dan Praktik 4 menyertakan tabel pengujian sehingga murid diarahkan memverifikasi program dengan data nyata.</li>
+              <li>Instruksi memperbaiki kode saat hasil tidak sesuai mendorong proses evaluasi dan debugging berulang secara positif.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Praktik 1 belum menyediakan pertanyaan refleksi pemahaman:</strong> Setelah menjalankan program identitas, belum ada cek pemahaman tentang fungsi input() dan variabel.
+              </li>
+              <li>
+                <strong>Ruang jawaban pseudocode belum dilengkapi indikator rancangan yang benar:</strong> Praktik 2–4 menyediakan ruang pseudocode tanpa acuan verifikasi awal sebelum coding dimulai.
+              </li>
+              <li>
+                <strong>Pengujian terstruktur baru ada pada Praktik 3 dan 4:</strong> Praktik 1 dan 2 juga sebaiknya dilengkapi tabel pengujian sederhana untuk membiasakan prosedur QA.
+              </li>
+              <li>
+                <strong>Belum ada refleksi akhir terpadu pada lembar kerja:</strong> LKPD belum menyediakan ruang refleksi penutup untuk merangkum kesulitan dan strategi penyelesaiannya.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi:</strong> Pertahankan urutan empat praktik, lalu tambahkan pertanyaan refleksi singkat pada akhir setiap praktik: <em>Apa fungsi sintaks yang digunakan?</em>, <em>Kesalahan apa yang ditemukan?</em>, dan <em>Bagaimana kamu memastikan hasil program sudah benar?</em>
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Sistematika LKPD sudah baik karena mengarahkan murid dari tugas sederhana menuju penerapan konsep yang lebih kompleks. Penambahan refleksi dan pemeriksaan pemahaman dapat membuat proses belajar lebih terarah dan membantu guru mengetahui kesulitan murid.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 5 -->
+        <article class="card analysis-card" id="aspek-lkpd-5">
+          <div class="aspect-header">
+            <div class="aspect-number">05</div>
+            <div>
+              <span class="aspect-tag">Aspek Komunikasi Instruksional</span>
+              <h2 class="aspect-title">Komponen Bahasa, Instruksi, dan Keterbacaan</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              Instruksi pada LKPD secara umum menggunakan bahasa yang langsung dan mudah dipahami. Setiap praktik menjelaskan permasalahan yang harus diselesaikan, sedangkan beberapa praktik juga menyertakan contoh hasil, ketentuan program, atau tabel pengujian.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Kalimat instruksi lugas dan menggunakan bentuk perintah aktif (membuat program, menuliskan pseudocode, menjalankan, memperbaiki).</li>
+              <li>Praktik 1 dan 2 menyediakan contoh hasil yang memandu ekspektasi visual murid terhadap keluaran terminal.</li>
+              <li>Penetapan nama file yang spesifik (praktikDasar1.py s.d. 4.py) meminimalkan kesalahan penyimpanan berkas.</li>
+              <li>Format tabel pengujian pada Praktik 3 dan 4 membantu dokumentasi pengujian berjalan tertib dan terstruktur.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Penomoran bagian perlu dirapikan:</strong> Pada format teks LKPD, hierarki penomoran antara tujuan, alat bahan, petunjuk, dan tugas masih menyatu. Sebaiknya gunakan penomoran bertingkat yang jelas.
+              </li>
+              <li>
+                <strong>Konsistensi istilah sapaan:</strong> Istilah "peserta didik", "siswa", dan "kalian" muncul bergantian. Sebaiknya diselaraskan menggunakan sapaan konsisten (misal: "murid").
+              </li>
+              <li>
+                <strong>Instruksi pengujian Praktik 3 perlu menanyakan alasan logika:</strong> Tabel hanya menanyakan kesesuaian, belum meminta murid menjelaskan mengapa hasil tersebut muncul.
+              </li>
+              <li>
+                <strong>Pembedaan visual teks masukan vs keluaran:</strong> Contoh hasil di Praktik 1 perlu membedakan secara visual mana teks yang diketik pengguna dan mana teks output program.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi:</strong> Gunakan hierarki penomoran yang konsisten (Bagian 1–6 dan Aktivitas Praktik 1–4). Pisahkan instruksi, contoh, ruang jawaban, dan format pengumpulan dengan styling visual yang kontras.
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Bahasa LKPD cukup komunikatif dan sesuai untuk kegiatan praktik pemula. Perbaikan pada penomoran, konsistensi istilah, serta penyajian contoh akan meningkatkan keterbacaan dan mengurangi kemungkinan salah memahami instruksi.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 6 -->
+        <article class="card analysis-card" id="aspek-lkpd-6">
+          <div class="aspect-header">
+            <div class="aspect-number">06</div>
+            <div>
+              <span class="aspect-tag">Aspek Otentisitas Asesmen</span>
+              <h2 class="aspect-title">Komponen Pengujian, Asesmen, dan Bukti Hasil Belajar</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              LKPD meminta murid menjalankan program dan menyediakan pengujian dengan data berbeda. Praktik 3 menggunakan tiga data suhu, sedangkan Praktik 4 meminta minimal tiga data input dan membandingkan hasil yang diharapkan dengan hasil program. Hasil pekerjaan yang dikumpulkan mencakup empat file Python, tangkapan layar hasil program, dan LKPD yang telah dikerjakan.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Pengujian program diposisikan sebagai aktivitas inti pemrograman, bukan pelengkap administratif semata.</li>
+              <li>Data suhu pada Praktik 3 (25&deg;C, 30&deg;C, 35&deg;C) menguji kondisi di bawah batas, tepat batas, dan di atas batas secara komprehensif.</li>
+              <li>Praktik 4 menuntut komparasi antara hasil yang diharapkan (expected) dengan hasil aktual program di terminal.</li>
+              <li>Pengumpulan file .py memungkinkan verifikasi logika kode secara langsung oleh guru di samping bukti screenshot.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Belum dilampirkan rubrik penilaian kinerja pada LKPD:</strong> Lembar kerja belum memuat rincian bobot skor ketepatan kode, kesesuaian pseudocode, pengujian, dan kerapian.
+              </li>
+              <li>
+                <strong>Tabel Praktik 3 belum memiliki kolom hasil yang diharapkan:</strong> Menambahkan kolom hasil harapan akan membuat perbandingan status 'Sesuai/Tidak' lebih objektif.
+              </li>
+              <li>
+                <strong>Pemilihan data uji Praktik 4 perlu mewakili seluruh cabang logika:</strong> Murid perlu diwajibkan memilih 3 data yang benar-benar memicu kondisi if, elif, dan else secara lengkap.
+              </li>
+              <li>
+                <strong>Perlu kolom khusus catatan debugging:</strong> Belum ada tempat untuk mencatat jenis error yang terjadi, penyebabnya, dan langkah perbaikan kode.
+              </li>
+              <li>
+                <strong>Verifikasi kode tidak boleh hanya mengandalkan screenshot:</strong> File .py harus menjadi dasar penilaian utama karena screenshot dapat menyamarkan kesalahan logika tersembunyi.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi:</strong> Tambahkan rubrik penilaian yang mencakup ketepatan algoritma/pseudocode, sintaks Python, ketepatan output, kelengkapan pengujian, kemampuan debugging, dan kerapian file. Minta murid mendokumentasikan log error jika terjadi perbaikan program.
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> LKPD telah memberikan ruang bagi asesmen keterampilan melalui produk dan pengujian program. Namun, rubrik penilaian dan dokumentasi proses debugging perlu diperjelas agar penilaian lebih transparan dan mampu menggambarkan proses belajar murid, bukan hanya hasil akhirnya.
+          </div>
+        </article>
+
+        <!-- ASPEK LKPD 7 -->
+        <article class="card analysis-card" id="aspek-lkpd-7">
+          <div class="aspect-header">
+            <div class="aspect-number">07</div>
+            <div>
+              <span class="aspect-tag">Aspek Relevansi Kejuruan</span>
+              <h2 class="aspect-title">Komponen Kontekstualitas dan Pengembangan Keterampilan</h2>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <h3 class="block-title">Kesesuaian Komponen</h3>
+            <p class="block-text">
+              LKPD mengaitkan konsep pemrograman dengan konteks Teknik Elektronika melalui perhitungan daya listrik, sistem kipas otomatis, pemeriksaan tegangan baterai, alarm suhu, lampu otomatis, dan pembacaan nilai sensor. Konteks ini membuat pemrograman diposisikan sebagai alat untuk menyelesaikan masalah yang relevan dengan bidang keahlian.
+            </p>
+          </div>
+
+          <div class="analysis-block strengths-box">
+            <h3 class="block-title block-title--strength">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Kekuatan
+            </h3>
+            <ul class="bullet-list">
+              <li>Praktik 2 menghubungkan operasi perkalian aritmatika secara nyata dengan hukum daya listrik (P = V &times; I).</li>
+              <li>Praktik 3 mengenalkan konsep sistem kontrol otomatis berbasis ambang batas suhu melalui struktur percabangan.</li>
+              <li>Praktik 4 membuka ruang eksplorasi studi kasus elektronika (alarm, sensor, voltmeter digital sederhana).</li>
+              <li>Aktivitas merancang pseudocode, coding, eksekusi terminal, dan debugging melatih daya nalar komputasional kejuruan murid.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-block recommendations-box">
+            <h3 class="block-title block-title--rec">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              Kekurangan & Rekomendasi Perbaikan
+            </h3>
+            <ol class="num-list">
+              <li>
+                <strong>Kasus masih berupa simulasi input terminal:</strong> Perlu penegasan pada pengantar LKPD bahwa penugasan ini melatih logika software kendali sebelum nantinya dihubungkan ke sensor perangkat keras mikrokontroler.
+              </li>
+              <li>
+                <strong>Tingkat kesulitan pilihan masalah Praktik 4 beragam:</strong> Perlu rubrik kriteria minimum agar variasi topik pilihan murid tetap dinilai secara adil dan setara.
+              </li>
+              <li>
+                <strong>Belum ada pertanyaan refleksi manfaat kejuruan:</strong> Murid belum diminta merefleksikan bagaimana kode yang dibuat bermanfaat dalam pekerjaan riil bidang elektronika.
+              </li>
+            </ol>
+            <div class="rec-note">
+              <strong>Rekomendasi:</strong> Minta murid menuliskan manfaat program dan alasan pemilihan kondisi atau batas nilai yang digunakan dalam konteks elektronika industri.
+            </div>
+          </div>
+
+          <div class="aspect-summary">
+            <strong>Kesimpulan Aspek:</strong> Kontekstualitas LKPD merupakan salah satu kekuatan utamanya. Tugas-tugasnya menghubungkan konsep Python dasar dengan situasi yang relevan bagi murid Teknik Elektronika, sekaligus memberi ruang untuk kreativitas dan pemecahan masalah.
+          </div>
+        </article>
+
+        <!-- KESIMPULAN UMUM LKPD -->
+        <article class="card analysis-card analysis-card--conclusion" id="kesimpulan-umum-lkpd">
+          <div class="aspect-header">
+            <div class="aspect-number aspect-number--primary">08</div>
+            <div>
+              <span class="aspect-tag">Sintesis Komprehensif Lembar Kerja</span>
+              <h2 class="aspect-title">Kesimpulan Umum & Rekomendasi LKPD</h2>
+            </div>
+          </div>
+
+          <div class="conclusion-content">
+            <p class="block-text">
+              Secara keseluruhan, LKPD Pemrograman Python Dasar telah dirancang dengan alur praktik yang cukup sistematis, mulai dari penggunaan input-output, perhitungan aritmatika, penerapan percabangan, hingga penyelesaian permasalahan sederhana dalam konteks Teknik Elektronika. LKPD tidak hanya meminta murid menulis kode, tetapi juga merancang pseudocode, menjalankan program, menguji hasil, dan memperbaiki kesalahan. Hal ini mendukung pembelajaran yang berorientasi pada praktik dan pemecahan masalah.
+            </p>
+            <p class="block-text">
+              Kekuatan utama LKPD terletak pada tugas yang bertahap, penggunaan konteks kejuruan, serta adanya tantangan terbuka pada Praktik 4. Meskipun demikian, LKPD masih dapat ditingkatkan melalui perumusan indikator keberhasilan yang lebih terukur, konsistensi penomoran dan istilah, penambahan rubrik penilaian, serta dokumentasi pengujian dan debugging yang lebih lengkap.
+            </p>
+            <p class="block-text">
+              Dengan perbaikan tersebut, LKPD dapat menjadi perangkat pembelajaran yang lebih jelas, terukur, dan mendukung murid dalam mengembangkan keterampilan pemrograman Python dasar secara mandiri sekaligus menerapkannya pada permasalahan yang relevan dengan bidang keahlian Teknik Elektronika.
+            </p>
+
+            <div class="synthesis-takeaways">
+              <h3 class="takeaways-title">Intisari Rekomendasi Perbaikan Utama LKPD:</h3>
+              <div class="takeaways-grid">
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Rubrik Penilaian & Log Debugging</span>
+                  <p>Menyertakan rubrik penilaian kinerja transparan dan menyediakan kolom khusus untuk mencatat jenis kesalahan kode, penyebab, dan solusinya.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Standarisasi Tabel Uji & Nilai Batas</span>
+                  <p>Menyediakan tabel pengujian baku dengan kolom expected output dan mewajibkan pemilihan data uji yang mewakili seluruh cabang kondisi logika.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Scaffolding Konversi Tipe Data</span>
+                  <p>Menambahkan petunjuk pengingat konversi float(input()) pada tugas perhitungan daya serta panduan penulisan blok percabangan.</p>
+                </div>
+                <div class="takeaway-item">
+                  <span class="takeaway-badge">Kriteria Tantangan Terbuka & Verifikasi Kode</span>
+                  <p>Menetapkan batasan minimal kompleksitas program pada Praktik 4 serta menjadikan file kode .py sebagai bukti otentik penilaian utama.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Kartu Transisi ke Analisis Lainnya -->
+      <div class="next-artifact-card">
+        <div class="next-artifact-info">
+          <span class="badge">Artefak Lainnya</span>
+          <h3 class="next-artifact-title">Eksplorasi Artefak Pembelajaran Lainnya</h3>
+          <p class="next-artifact-desc">Tinjau kembali perencanaan pembelajaran pada RPP atau pendalaman materi konseptual pada Modul Bahan Ajar.</p>
+        </div>
+        <div class="next-artifact-actions">
+          <button type="button" class="btn btn--outline switch-to-rpp-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Analisis RPP (Artefak 01)</span>
+          </button>
+          <button type="button" class="btn btn--secondary switch-to-materi-btn">
+            <span>Analisis Modul Materi (Artefak 02)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigasi Bawah Antarhalaman -->
+    <nav class="bottom-nav" aria-label="Navigasi Halaman Portofolio">
+      <a href={berandaHref} class="btn btn--outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Kembali ke Beranda UAS</span>
+      </a>
+
+      <a href={refleksiHref} class="btn btn--primary">
+        <span>Menuju Refleksi Pembelajaran</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </nav>
   </div>
 </PortfolioLayout>
+
+<script is:inline>
+  function setupArtifactTabs() {
+    const tabRppBtn = document.getElementById('tab-btn-rpp');
+    const tabMateriBtn = document.getElementById('tab-btn-materi');
+    const tabLkpdBtn = document.getElementById('tab-btn-lkpd');
+
+    const panelRpp = document.getElementById('panel-rpp');
+    const panelMateri = document.getElementById('panel-materi');
+    const panelLkpd = document.getElementById('panel-lkpd');
+
+    const switchToRppBtns = document.querySelectorAll('.switch-to-rpp-btn');
+    const switchToMateriBtns = document.querySelectorAll('.switch-to-materi-btn');
+    const switchToLkpdBtns = document.querySelectorAll('.switch-to-lkpd-btn');
+
+    function switchTab(target) {
+      // Deactivate all
+      tabRppBtn?.classList.remove('active');
+      tabRppBtn?.setAttribute('aria-selected', 'false');
+      tabMateriBtn?.classList.remove('active');
+      tabMateriBtn?.setAttribute('aria-selected', 'false');
+      tabLkpdBtn?.classList.remove('active');
+      tabLkpdBtn?.setAttribute('aria-selected', 'false');
+
+      panelRpp?.classList.remove('active');
+      panelMateri?.classList.remove('active');
+      panelLkpd?.classList.remove('active');
+
+      if (target === 'lkpd') {
+        tabLkpdBtn?.classList.add('active');
+        tabLkpdBtn?.setAttribute('aria-selected', 'true');
+        panelLkpd?.classList.add('active');
+      } else if (target === 'materi') {
+        tabMateriBtn?.classList.add('active');
+        tabMateriBtn?.setAttribute('aria-selected', 'true');
+        panelMateri?.classList.add('active');
+      } else {
+        tabRppBtn?.classList.add('active');
+        tabRppBtn?.setAttribute('aria-selected', 'true');
+        panelRpp?.classList.add('active');
+      }
+    }
+
+    tabRppBtn?.addEventListener('click', () => {
+      switchTab('rpp');
+      history.replaceState(null, '', '#analisis-rpp');
+    });
+
+    tabMateriBtn?.addEventListener('click', () => {
+      switchTab('materi');
+      history.replaceState(null, '', '#analisis-materi');
+    });
+
+    tabLkpdBtn?.addEventListener('click', () => {
+      switchTab('lkpd');
+      history.replaceState(null, '', '#analisis-lkpd');
+    });
+
+    switchToRppBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        switchTab('rpp');
+        history.replaceState(null, '', '#analisis-rpp');
+        document.getElementById('identitas-rpp')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    switchToMateriBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        switchTab('materi');
+        history.replaceState(null, '', '#analisis-materi');
+        document.getElementById('identitas-materi')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    switchToLkpdBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        switchTab('lkpd');
+        history.replaceState(null, '', '#analisis-lkpd');
+        document.getElementById('identitas-lkpd')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Hash handler on load
+    const hash = window.location.hash;
+    if (hash === '#art-uas-02' || hash === '#art-02' || hash === '#analisis-lkpd' || hash.startsWith('#aspek-lkpd-') || hash === '#kesimpulan-umum-lkpd') {
+      switchTab('lkpd');
+      if (hash.startsWith('#aspek-lkpd-') || hash === '#kesimpulan-umum-lkpd') {
+        setTimeout(() => {
+          const el = document.querySelector(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else if (hash === '#art-uas-01' || hash === '#art-01' || hash === '#analisis-materi' || hash.startsWith('#aspek-materi-') || hash === '#kesimpulan-umum-materi') {
+      switchTab('materi');
+      if (hash.startsWith('#aspek-materi-') || hash === '#kesimpulan-umum-materi') {
+        setTimeout(() => {
+          const el = document.querySelector(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else if (hash === '#art-uas-03' || hash === '#art-03' || hash === '#analisis-rpp' || hash.startsWith('#aspek-rpp-') || hash === '#kesimpulan-umum-rpp') {
+      switchTab('rpp');
+      if (hash.startsWith('#aspek-rpp-') || hash === '#kesimpulan-umum-rpp') {
+        setTimeout(() => {
+          const el = document.querySelector(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupArtifactTabs);
+  } else {
+    setupArtifactTabs();
+  }
+</script>
 
 <style>
   .page-header {
@@ -44,10 +2158,20 @@ import { uasPortfolio } from '../../data/portfolioData';
     margin-bottom: var(--space-8);
   }
 
+  .header-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
   .page-title {
-    font-size: var(--text-3xl);
+    font-size: var(--text-4xl);
+    color: var(--color-text);
     margin-top: var(--space-2);
     margin-bottom: var(--space-3);
+    letter-spacing: -0.02em;
   }
 
   .page-desc {
@@ -57,43 +2181,587 @@ import { uasPortfolio } from '../../data/portfolioData';
     margin: 0;
   }
 
-  .placeholder-card {
-    text-align: center;
-    padding: var(--space-12) var(--space-8);
+  /* Artifact Switcher / Tabs */
+  .artifact-switcher-wrapper {
+    margin-bottom: var(--space-8);
+  }
+
+  .artifact-switcher {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    box-shadow: 0 4px 16px rgba(34, 40, 49, 0.04);
+  }
+
+  @media (min-width: 640px) {
+    .artifact-switcher {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .artifact-switcher {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .artifact-tab-btn {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    max-width: 680px;
-    margin-inline: auto;
+    align-items: flex-start;
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
   }
 
-  .placeholder-icon {
-    width: 72px;
-    height: 72px;
-    background-color: var(--color-primary-light);
-    color: var(--color-primary);
-    border-radius: 50%;
+  .artifact-tab-btn:hover {
+    background-color: #f7f9fd;
+    border-color: #e2e8f0;
+  }
+
+  .artifact-tab-btn.active {
+    background-color: #ffffff;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(63, 114, 175, 0.12);
+  }
+
+  .tab-badge-group {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: var(--space-4);
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
-  .placeholder-heading {
-    font-size: var(--text-xl);
+  .tab-badge {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-active);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .tab-badge--secondary {
+    background-color: #e0f2fe;
+    color: #0369a1;
+  }
+
+  .tab-badge--accent {
+    background-color: #fef3c7;
+    color: #b45309;
+  }
+
+  .tab-type {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    font-weight: var(--font-medium);
+  }
+
+  .tab-title {
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+
+  .artifact-tab-btn.active .tab-title {
+    color: var(--color-primary-active);
+  }
+
+  /* Tab Panels */
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  .tab-anchor {
+    scroll-margin-top: 100px;
+  }
+
+  /* Artifact Hero Card */
+  .artifact-hero-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f4f8fd 100%);
+    border: 1px solid var(--color-border);
+    padding: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .artifact-hero-card {
+      padding: var(--space-10);
+    }
+  }
+
+  .artifact-hero-meta-top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     margin-bottom: var(--space-3);
   }
 
-  .placeholder-text {
-    font-size: var(--text-sm);
+  .artifact-code {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-active);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .artifact-hero-title {
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+    line-height: 1.3;
+  }
+
+  .artifact-hero-desc {
+    font-size: var(--text-base);
     color: var(--color-text-muted);
     line-height: 1.6;
+    max-width: var(--reading-width);
     margin-bottom: var(--space-6);
   }
 
-  .placeholder-actions {
+  .artifact-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .artifact-specs-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .artifact-specs-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .spec-item {
     display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: var(--font-medium);
+  }
+
+  .spec-val {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    font-weight: var(--font-semibold);
+  }
+
+  .artifact-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  /* Quick Jump Navigation */
+  .quick-jump-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .quick-jump-nav {
+      flex-direction: row;
+      align-items: center;
+      padding: var(--space-3) var(--space-6);
+    }
+  }
+
+  .quick-jump-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .quick-jump-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .jump-pill {
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-text);
+    background-color: #f1f4f9;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    padding: 0.3rem 0.75rem;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+
+  .jump-pill:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-active);
+    border-color: var(--color-primary);
+  }
+
+  .jump-pill--highlight {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-active);
+    font-weight: var(--font-semibold);
+  }
+
+  /* Analysis Stack */
+  .analysis-sections-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .analysis-card {
+    padding: var(--space-8);
+    background-color: var(--color-surface);
+    scroll-margin-top: 90px;
+  }
+
+  @media (min-width: 768px) {
+    .analysis-card {
+      padding: var(--space-10);
+    }
+  }
+
+  .aspect-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 2px solid #eef2f7;
+  }
+
+  .aspect-number {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .aspect-number--primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+  }
+
+  .aspect-tag {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .aspect-title {
+    font-size: var(--text-2xl);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .analysis-block {
+    margin-bottom: var(--space-6);
+  }
+
+  .block-title {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .block-title--strength {
+    color: var(--color-success);
+  }
+
+  .block-title--rec {
+    color: var(--color-primary-active);
+  }
+
+  .block-text {
+    font-size: var(--text-base);
+    color: var(--color-text);
+    line-height: 1.75;
+    margin-bottom: var(--space-4);
+    text-align: justify;
+  }
+
+  /* Strengths Box */
+  .strengths-box {
+    background-color: #f6fbf8;
+    border-left: 4px solid var(--color-success);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .bullet-list {
+    margin: 0;
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .bullet-list li {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Recommendations Box */
+  .recommendations-box {
+    background-color: #f7f9fd;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .num-list {
+    margin: 0;
+    padding-left: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .num-list li {
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .rec-note {
+    margin-top: var(--space-2);
+    padding: var(--space-3);
+    background-color: #ffffff;
+    border: 1px dashed #c0d1e8;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .rec-note strong {
+    color: var(--color-primary-active);
+  }
+
+  /* Aspect Summary */
+  .aspect-summary {
+    background-color: #f1f5fa;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .aspect-summary strong {
+    color: var(--color-primary-active);
+  }
+
+  /* Conclusion Section (Full 1 Grid) */
+  .analysis-card--conclusion {
+    background: linear-gradient(180deg, #ffffff 0%, #f6f9fc 100%);
+    border: 2px solid #b8cde4;
+  }
+
+  .conclusion-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .synthesis-takeaways {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .takeaways-title {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+  }
+
+  .takeaways-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .takeaway-item {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: 0 2px 8px rgba(34, 40, 49, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .takeaway-badge {
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .takeaway-item p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .takeaway-item {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    .takeaway-badge {
+      min-width: 240px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .takeaway-item p {
+      flex: 1;
+    }
+  }
+
+  /* Next Artifact Transition Card */
+  .next-artifact-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-8);
+    margin-top: var(--space-10);
+    box-shadow: 0 4px 16px rgba(34, 40, 49, 0.04);
+  }
+
+  @media (min-width: 768px) {
+    .next-artifact-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .next-artifact-info {
+    max-width: 600px;
+  }
+
+  .next-artifact-title {
+    font-size: var(--text-xl);
+    color: var(--color-text);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .next-artifact-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .next-artifact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  /* Bottom Navigation */
+  .bottom-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 640px) {
+    .bottom-nav {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .artifact-switcher-wrapper,
+    .quick-jump-nav,
+    .next-artifact-card,
+    .bottom-nav {
+      display: none !important;
+    }
+
+    .tab-panel {
+      display: block !important;
+      margin-bottom: var(--space-12);
+    }
   }
 </style>
-
