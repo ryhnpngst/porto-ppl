@@ -27,9 +27,6 @@ const { lessonPlan, teachingVideo, analysisPageHref } = Astro.props;
     <div class="evidence-header">
       <span class="badge">Bukti Utama Praktik Mengajar</span>
       <h2 id="evidence-title" class="evidence-title">Rancangan Pembelajaran & Video Praktik</h2>
-      <p class="evidence-subtitle">
-        Dua artefak sentral yang menjadi dasar pelaksanaan dan evaluasi pembelajaran mandiri. Setiap produk dilengkapi preview interaktif serta akses berkas sumber asli di Google Drive.
-      </p>
     </div>
 
     <!-- Product 1: Rancangan Pembelajaran / Modul Ajar -->
@@ -95,12 +92,6 @@ const { lessonPlan, teachingVideo, analysisPageHref } = Astro.props;
             allow="autoplay"
           ></iframe>
         </div>
-        <div class="preview-footer">
-          <span class="fallback-text">
-            Kendala memuat preview? Dokumen dapat langsung diakses via
-            <a href={lessonPlan.driveUrl} target="_blank" rel="noopener noreferrer">Tautan Google Drive Cadangan</a>.
-          </span>
-        </div>
       </div>
     </div>
 
@@ -146,15 +137,6 @@ const { lessonPlan, teachingVideo, analysisPageHref } = Astro.props;
             </svg>
           </a>
         </div>
-
-        <div class="video-notice">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <span>Video ini menyajikan interaksi pembelajaran aktif murid dengan tetap menjaga anonimitas identitas peserta didik.</span>
-        </div>
       </div>
 
       <!-- Video Preview Frame -->
@@ -173,12 +155,6 @@ const { lessonPlan, teachingVideo, analysisPageHref } = Astro.props;
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
-        </div>
-        <div class="preview-footer">
-          <span class="fallback-text">
-            Bila video tidak berputar otomatis, silakan buka langsung di
-            <a href={teachingVideo.driveUrl} target="_blank" rel="noopener noreferrer">Repositori Google Drive Video</a>.
-          </span>
         </div>
       </div>
     </div>

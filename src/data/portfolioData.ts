@@ -46,7 +46,7 @@ export const studentProfile = {
   studyProgram: "Informatika",
   university: "Universitas Negeri Yogyakarta",
   school: "SMK Negeri 3 Yogyakarta",
-  email: "rayhanwibowo24@gmail.com",
+  email: "rayhan182.2025@student.uny.ac.id",
   github: "https://github.com/ryhnpngst",
   bio: "Mahasiswa PPG Calon Guru bidang Informatika yang tertarik pada pembelajaran pemrograman dan pemanfaatan teknologi dalam pendidikan.",
   focusAreas: [
@@ -73,15 +73,15 @@ export const utsPortfolio: PortfolioConfig = {
   introText:
     "Portofolio ini disusun secara mandiri untuk mendokumentasikan proses pembelajaran pada Siklus 1. Fokus utama diarahkan pada penerapan model Problem-Based Learning (PBL) untuk memfasilitasi pemahaman logika pemrograman dan algoritma dasar pada murid fase awal menengah.",
   lessonPlan: {
-    title: "Modul Ajar / RPP Siklus 1: Algoritma Percabangan",
+    title: "RPP Siklus 1: Algoritma Percabangan",
     description:
       "Rancangan pembelajaran lengkap mencakup tujuan pembelajaran, asesmen diagnostik, alur aktivitas model Problem-Based Learning, diferensiasi proses, dan lembar refleksi murid.",
     topic: "Algoritma Percabangan dalam Kehidupan Sehari-hari",
-    classInfo: "Kelas X Fase E • 3 JP (3 × 45 Menit)",
+    classInfo: "Kelas X Fase E • 4 JP (4 × 45 Menit)",
     driveUrl:
-      "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
+      "https://drive.google.com/file/d/1QUPb38XfaNV7IbHKa2xPxBttvXOuE0fv/view?usp=sharing",
     embedUrl:
-      "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
+      "https://drive.google.com/file/d/1QUPb38XfaNV7IbHKa2xPxBttvXOuE0fv/preview",
   },
   teachingVideo: {
     title: "Video Pelaksanaan Praktik Mengajar Siklus 1",
