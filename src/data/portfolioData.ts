@@ -95,21 +95,25 @@ export const utsPortfolio: PortfolioConfig = {
   supportingArtifacts: [
     {
       id: "art-01",
-      title: "Materi & Media Ajar Interaktif (Slide & Live Code)",
-      category: "Media Pembelajaran",
+      title: "Modul Materi: Algoritma dan Representasinya",
+      category: "Bahan Ajar",
       description:
-        "Media presentasi visual dan demonstrasi interaktif konsep logika percabangan IF-ELSE.",
-      context: "Digunakan pada fase orientasi masalah dan pembuktian konsep.",
-      driveUrl: "https://drive.google.com/",
+        "Modul materi 21 bagian terstruktur yang menyajikan konsep algoritma, IPO, pseudocode, flowchart, dan analisis debugging kontekstual.",
+      context:
+        "Bahan bacaan mandiri dan referensi konsep bagi murid kelas X Fase E.",
+      driveUrl:
+        "https://drive.google.com/file/d/1NJVn40EFtx5b-Vtq48t-icZQUcvVyJiI/view?usp=sharing",
     },
     {
       id: "art-02",
-      title: "LKPD Berbasis Kasus Kontekstual",
+      title: "LKPD: Algoritma dan Pemrograman Dasar",
       category: "LKPD / Jobsheet",
       description:
-        "Lembar kerja kelompok yang menyajikan studi kasus sistem pemesanan tiket otomatis.",
-      context: "Digunakan saat fase penyelidikan kelompok terbimbing.",
-      driveUrl: "https://drive.google.com/",
+        "Lembar Kerja Peserta Didik berbasis aktivitas bertahap yang menyajikan studi kasus lampu otomatis, sistem pendingin kipas cerdas berbasis suhu, dan debugging logika.",
+      context:
+        "Panduan penyelidikan kelompok, representasi algoritma, pengujian nilai batas, dan refleksi mandiri murid kelas X Fase E.",
+      driveUrl:
+        "https://drive.google.com/file/d/1GG5G22nvyOQt-rD8YJYMkJIdzzW4054y/view?usp=sharing",
     },
     {
       id: "art-03",
@@ -119,7 +123,8 @@ export const utsPortfolio: PortfolioConfig = {
         "Perencanaan pembelajaran lengkap yang telah memuat langkah-langkah kegiatan belajar serta instrumen asesmen terintegrasi.",
       context:
         "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proses maupun hasil belajar murid.",
-      driveUrl: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
+      driveUrl:
+        "https://drive.google.com/file/d/1QUPb38XfaNV7IbHKa2xPxBttvXOuE0fv/view?usp=sharing",
     },
     {
       id: "art-04",
@@ -195,8 +200,10 @@ export const uasPortfolio: PortfolioConfig = {
       category: "RPP",
       description:
         "Perencanaan pembelajaran berbasis proyek (PjBL) yang memuat panduan aktivitas, rubrik penilaian, dan instrumen asesmen terintegrasi.",
-      context: "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proyek murid.",
-      driveUrl: "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
+      context:
+        "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proyek murid.",
+      driveUrl:
+        "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
     },
     {
       id: "art-uas-04",
