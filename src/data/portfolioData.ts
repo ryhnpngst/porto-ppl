@@ -41,7 +41,6 @@ export interface PortfolioConfig {
 
 export const studentProfile = {
   name: "Rayhan Pangestu Wibowo",
-  role: "Mahasiswa PPG Calon Guru",
   program: "Pendidikan Profesi Guru (PPG) Calon Guru",
   studyProgram: "Informatika",
   university: "Universitas Negeri Yogyakarta",
@@ -49,12 +48,6 @@ export const studentProfile = {
   email: "rayhan182.2025@student.uny.ac.id",
   github: "https://github.com/ryhnpngst",
   bio: "Mahasiswa PPG Calon Guru bidang Informatika yang tertarik pada pembelajaran pemrograman dan pemanfaatan teknologi dalam pendidikan.",
-  focusAreas: [
-    "Berpikir Komputasional (Computational Thinking)",
-    "Problem-Based Learning & Project-Based Learning",
-    "Integrasi Media Pembelajaran Interaktif",
-    "Asesmen Formatif yang Berorientasi Perkembangan Murid",
-  ],
 };
 
 export const utsPortfolio: PortfolioConfig = {
@@ -125,15 +118,6 @@ export const utsPortfolio: PortfolioConfig = {
         "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proses maupun hasil belajar murid.",
       driveUrl:
         "https://drive.google.com/file/d/1QUPb38XfaNV7IbHKa2xPxBttvXOuE0fv/view?usp=sharing",
-    },
-    {
-      id: "art-04",
-      title: "Sampel Hasil Kerja & Respon Murid (Anonim)",
-      category: "Hasil Belajar",
-      description:
-        "Dokumentasi solusi diagram alir dan pseudocode yang dihasilkan kelompok murid.",
-      context: "Bahan bukti evaluasi ketercapaian tujuan pembelajaran.",
-      driveUrl: "https://drive.google.com/",
     },
   ],
 };

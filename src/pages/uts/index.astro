@@ -135,6 +135,7 @@ const analysisPageHref = `${base}/uts/analisis-artefak/`;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6);
+    width: 100%;
   }
 
   @media (min-width: 640px) {
@@ -143,9 +144,15 @@ const analysisPageHref = `${base}/uts/analisis-artefak/`;
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) and (max-width: 991px) {
+    .artifacts-grid > :last-child:nth-child(odd) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 992px) {
     .artifacts-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
