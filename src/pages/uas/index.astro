@@ -28,7 +28,7 @@ const analysisPageHref = `${base}/uas/analisis-artefak/`;
     topic={uasPortfolio.topic}
     classLevel={uasPortfolio.classLevel}
     school={uasPortfolio.school}
-    primaryActionLabel="Lihat Modul Proyek Terpilih"
+    primaryActionLabel="Lihat Rancangan Modul Ajar"
     primaryActionHref="#rancangan-pembelajaran"
     secondaryActionLabel="Tonton Video Pembelajaran"
     secondaryActionHref="#video-praktik"
@@ -52,10 +52,10 @@ const analysisPageHref = `${base}/uas/analisis-artefak/`;
     <div class="container">
       <div class="supporting-header">
         <div>
-          <span class="badge">Artefak Pendukung Siklus Terpilih</span>
-          <h2 id="supporting-title" class="supporting-title">Instrumen & Bukti Pembelajaran Siklus 2</h2>
+          <span class="badge">Artefak Pendukung Pembelajaran</span>
+          <h2 id="supporting-title" class="supporting-title">Instrumen & Bukti Pembelajaran Siklus 3</h2>
           <p class="supporting-desc">
-            Dokumen pendukung siklus terbaik terpilih mencakup panduan proyek komputasi, lembar observasi autentik, rubrik penilaian kinerja, dan portofolio visualisasi data peserta didik.
+            Dokumen pendukung yang memperkuat ketercapaian proses pembelajaran, mulai dari media ajar interaktif, lembar kerja murid, hingga instrumen evaluasi formatif.
           </p>
         </div>
         <a href={analysisPageHref} class="btn btn--secondary all-analysis-btn">
@@ -135,6 +135,7 @@ const analysisPageHref = `${base}/uas/analisis-artefak/`;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6);
+    width: 100%;
   }
 
   @media (min-width: 640px) {
@@ -143,10 +144,15 @@ const analysisPageHref = `${base}/uas/analisis-artefak/`;
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 640px) and (max-width: 991px) {
+    .artifacts-grid > :last-child:nth-child(odd) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 992px) {
     .artifacts-grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
-

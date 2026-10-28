@@ -124,21 +124,21 @@ export const utsPortfolio: PortfolioConfig = {
 
 export const uasPortfolio: PortfolioConfig = {
   type: "UAS",
-  title: "E-Portfolio PPL Mandiri — Siklus Terpilih (Siklus 2)",
+  title: "E-Portfolio PPL Mandiri — Siklus Terpilih (Siklus 3)",
   subtitle:
     "Dokumentasi rancangan terbaik, video pelaksanaan, analisis artefak berbasis teori, dan refleksi profesional siklus terpilih.",
-  badgeLabel: "Portofolio UAS • Siklus 2 (Siklus Terpilih)",
-  cycle: "Siklus 2 (Siklus Terpilih)",
+  badgeLabel: "Portofolio UAS • Siklus 3 (Siklus Terpilih)",
+  cycle: "Siklus 3 (Siklus Terpilih)",
   classLevel: "Kelas X Fase E",
   topic: "Analisis Data & Visualisasi Informasi dengan Tools Digital",
   school: "SMK Negeri 3 Yogyakarta",
   period: "Semester Ganjil 2024/2025",
   heroDescription:
-    "Dokumentasi akademik praktik mengajar mandiri Siklus Terpilih (Siklus 2 dari rangkaian Siklus 2–4). Mengedepankan integrasi Project-Based Learning (PjBL) untuk mengembangkan literasi data dan kemampuan interpretasi visual informasi.",
+    "Dokumentasi akademik praktik mengajar mandiri Siklus Terpilih (Siklus 3 dari rangkaian Siklus 2–4). Mengedepankan integrasi Project-Based Learning (PjBL) untuk mengembangkan literasi data dan kemampuan interpretasi visual informasi.",
   introText:
     "Portofolio UAS ini memusatkan analisis pada siklus terbaik yang dipilih setelah evaluasi berkelanjutan dari siklus sebelumnya. Praktik ini menunjukkan peningkatan kemampuan scaffolding guru serta keterlibatan aktif murid dalam proyek analisis data nyata.",
   lessonPlan: {
-    title: "Modul Ajar / RPP Siklus 2: Analisis Data Kontekstual",
+    title: "Modul Ajar / RPP Siklus 3: Analisis Data Kontekstual",
     description:
       "Rancangan pembelajaran berbasis proyek (PjBL) dengan integrasi dataset lokal dan pedoman visualisasi data informatif untuk kelas X.",
     topic: "Pengolahan dan Interpretasi Data Menggunakan Aplikasi Spreadsheet",
@@ -149,7 +149,7 @@ export const uasPortfolio: PortfolioConfig = {
       "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
   },
   teachingVideo: {
-    title: "Video Pelaksanaan Praktik Mengajar Siklus Terpilih (Siklus 2)",
+    title: "Video Pelaksanaan Praktik Mengajar Siklus Terpilih (Siklus 3)",
     description:
       "Rekaman utuh proses pembelajaran berbasis proyek kolaboratif, menunjukkan bimbingan diferensiasi serta presentasi temuan data oleh murid.",
     context: "Praktik di Laboratorium Komputer Sekolah Mitra",
@@ -162,7 +162,7 @@ export const uasPortfolio: PortfolioConfig = {
     {
       id: "art-uas-01",
       title: "Modul Proyek Analisis Data & Rubrik PjBL",
-      category: "Perencanaan & Asesmen",
+      category: "Media & Bahan Ajar",
       description:
         "Panduan proyek terstruktur mulai dari eksplorasi data mentah hingga penyajian infografis visual.",
       context:
@@ -171,8 +171,8 @@ export const uasPortfolio: PortfolioConfig = {
     },
     {
       id: "art-uas-02",
-      title: "Dataset Latihan Kontekstual & Template Analisis",
-      category: "Media Pembelajaran",
+      title: "Dataset Latihan Kontekstual & Lembar Observasi (LKPD)",
+      category: "LKPD",
       description:
         "Dataset terkurasi seputar pola konsumsi energi sekolah untuk melatih penalaran analitis.",
       context: "Digunakan saat eksplorasi data di laboratorium komputer.",
@@ -188,16 +188,6 @@ export const uasPortfolio: PortfolioConfig = {
         "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proyek murid.",
       driveUrl:
         "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
-    },
-    {
-      id: "art-uas-04",
-      title: "Dokumentasi Karya Visualisasi & Refleksi Murid",
-      category: "Hasil Belajar",
-      description:
-        "Dashboard visual sederhana buatan murid beserta catatan refleksi belajar mandiri mereka.",
-      context:
-        "Bukti keberhasilan penerapan pendekatan PjBL yang berpusat pada murid.",
-      driveUrl: "https://drive.google.com/",
     },
   ],
 };
