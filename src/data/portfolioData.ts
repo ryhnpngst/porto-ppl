@@ -130,64 +130,66 @@ export const uasPortfolio: PortfolioConfig = {
   badgeLabel: "Portofolio UAS • Siklus 3 (Siklus Terpilih)",
   cycle: "Siklus 3 (Siklus Terpilih)",
   classLevel: "Kelas X Fase E",
-  topic: "Analisis Data & Visualisasi Informasi dengan Tools Digital",
+  topic: "Pemrograman Python Dasar",
   school: "SMK Negeri 3 Yogyakarta",
   period: "Semester Ganjil 2024/2025",
   heroDescription:
-    "Dokumentasi akademik praktik mengajar mandiri Siklus Terpilih (Siklus 3 dari rangkaian Siklus 2–4). Mengedepankan integrasi Project-Based Learning (PjBL) untuk mengembangkan literasi data dan kemampuan interpretasi visual informasi.",
+    "Dokumentasi akademik praktik mengajar mandiri pada siklus terpilih (Siklus 3 dari rangkaian Siklus 2–4), dengan mengintegrasikan model Problem-Based Learning (PBL) untuk mengembangkan kemampuan pemecahan masalah dan penerapan konsep pemrograman Python dasar.",
   introText:
     "Portofolio UAS ini memusatkan analisis pada siklus terbaik yang dipilih setelah evaluasi berkelanjutan dari siklus sebelumnya. Praktik ini menunjukkan peningkatan kemampuan scaffolding guru serta keterlibatan aktif murid dalam proyek analisis data nyata.",
   lessonPlan: {
     title: "Modul Ajar / RPP Siklus 3: Analisis Data Kontekstual",
     description:
-      "Rancangan pembelajaran berbasis proyek (PjBL) dengan integrasi dataset lokal dan pedoman visualisasi data informatif untuk kelas X.",
-    topic: "Pengolahan dan Interpretasi Data Menggunakan Aplikasi Spreadsheet",
-    classInfo: "Kelas X Fase E • 3 JP (3 × 45 Menit)",
+      "Rancangan pembelajaran berbasis masalah yang mengintegrasikan latihan pemrograman Python dasar melalui analisis masalah kontekstual, penyusunan algoritma, penulisan kode, serta pengujian dan perbaikan program untuk kelas X.",
+    topic: "Pemrograman Dasar Python",
+    classInfo: "Kelas X Fase E • 8 JP (8 × 45 Menit)",
     driveUrl:
-      "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
+      "https://drive.google.com/file/d/1tbnSo2PdhYbjxcVl--p0wRaaqylVGUsc/view?usp=sharing",
     embedUrl:
-      "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/preview",
+      "https://drive.google.com/file/d/1tbnSo2PdhYbjxcVl--p0wRaaqylVGUsc/preview",
   },
   teachingVideo: {
     title: "Video Pelaksanaan Praktik Mengajar Siklus Terpilih (Siklus 3)",
     description:
-      "Rekaman utuh proses pembelajaran berbasis proyek kolaboratif, menunjukkan bimbingan diferensiasi serta presentasi temuan data oleh murid.",
+      "Rekaman pembelajaran berbasis PBL yang menampilkan praktik Python secara langsung, pendampingan guru, dan pengerjaan LKPD oleh murid.",
     context: "Praktik di Laboratorium Komputer Sekolah Mitra",
-    duration: "Video Pembelajaran Utuh & Cuplikan Kunci",
-    driveUrl:
-      "https://drive.google.com/file/d/1a2b3c4d5e_sample_video_uas/view?usp=sharing",
-    embedUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+    duration: "Video Pembelajaran",
+    driveUrl: "https://youtu.be/dkZ9_AhsiJ8",
+    embedUrl: "https://www.youtube-nocookie.com/embed/dkZ9_AhsiJ8",
   },
   supportingArtifacts: [
     {
       id: "art-uas-01",
-      title: "Modul Proyek Analisis Data & Rubrik PjBL",
+      title: "Modul Pemrograman Python Dasar",
       category: "Media & Bahan Ajar",
       description:
-        "Panduan proyek terstruktur mulai dari eksplorasi data mentah hingga penyajian infografis visual.",
+        "Panduan pembelajaran terstruktur untuk memahami dasar-dasar Python, mulai dari pengenalan sintaks dan variabel.",
       context:
-        "Diberikan sebagai acuan kerja mandiri kelompok selama proyek berlangsung.",
-      driveUrl: "https://drive.google.com/",
+        "Diberikan sebagai panduan kerja mandiri atau kelompok dalam mempelajari konsep dasar Python dan menyelesaikan latihan pemrograman secara bertahap.",
+      driveUrl:
+        "https://drive.google.com/file/d/1X-L7zGj1DGv5HC4qNckr9-5MJ-fAUZgV/view?usp=sharing",
     },
     {
       id: "art-uas-02",
-      title: "Dataset Latihan Kontekstual & Lembar Observasi (LKPD)",
+      title: "LKPD: Pemrograman Python Dasar",
       category: "LKPD",
       description:
-        "Dataset terkurasi seputar pola konsumsi energi sekolah untuk melatih penalaran analitis.",
-      context: "Digunakan saat eksplorasi data di laboratorium komputer.",
-      driveUrl: "https://drive.google.com/",
+        "Panduan latihan terstruktur untuk mempelajari sintaks Python, penggunaan variabel dan tipe data, struktur percabangan, perulangan, serta list melalui penyelesaian masalah kontekstual.",
+      context:
+        "Digunakan sebagai panduan praktik mandiri atau kelompok di laboratorium komputer untuk menulis, menjalankan, menguji, dan memperbaiki kode Python dasar.",
+      driveUrl:
+        "https://drive.google.com/file/d/17hY_1m5Gnr0GUBjHfZXiCBfodW9YK9cu/view?usp=sharing",
     },
     {
       id: "art-uas-03",
       title: "Rancangan Pembelajaran (RPP / Modul Ajar)",
       category: "RPP",
       description:
-        "Perencanaan pembelajaran berbasis proyek (PjBL) yang memuat panduan aktivitas, rubrik penilaian, dan instrumen asesmen terintegrasi.",
+        "Perencanaan pembelajaran berbasis masalah (Problem-Based Learning atau PBL) yang memuat tahapan pemecahan masalah, aktivitas pembelajaran, serta instrumen asesmen untuk mengukur pemahaman konsep dan keterampilan pemrograman Python dasar.",
       context:
-        "Pedoman pelaksanaan pembelajaran dan instrumen asesmen proyek murid.",
+        "Pedoman pelaksanaan pembelajaran berbasis masalah dan acuan asesmen untuk mengevaluasi kemampuan murid dalam menganalisis masalah, menyusun algoritma, menulis kode Python, serta menguji dan memperbaiki program.",
       driveUrl:
-        "https://drive.google.com/file/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs/view?usp=sharing",
+        "https://drive.google.com/file/d/1tbnSo2PdhYbjxcVl--p0wRaaqylVGUsc/view?usp=sharing",
     },
   ],
 };
